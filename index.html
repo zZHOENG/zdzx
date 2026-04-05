@@ -36,8 +36,7 @@
             startup: {
                 pageReady: () => {
                     return MathJax.startup.defaultPageReady();
-                },
-              	typeset: false   // 禁用自动排版，手动触发
+                }
             }
         };
     </script>
@@ -467,25 +466,11 @@ $Do\\space Not\\space Important$（无妨）
     // 辅助函数：解析 Markdown 并触发 MathJax 渲染
     async function renderMarkdownWithMathJax(markdownString, targetElement) {
         if (!markdownString) return;
-        try {
-            // 等待 MathJax 就绪（最多等待 3 秒）
-            if (window.MathJax && !window.MathJax.startup?.promise) {
-                // 如果 MathJax 尚未初始化，等待一小段时间
-                await new Promise(resolve => setTimeout(resolve, 300));
-            }
-            const rawHtml = marked.parse(markdownString, { async: false });
-            targetElement.innerHTML = rawHtml;
-            // 确保 MathJax 可用
-            if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
-                await MathJax.typesetPromise([targetElement]);
-            } else {
-                console.warn('MathJax not ready, rendering without LaTeX');
-            }
-        } catch (err) {
-            console.error('Markdown/MathJax rendering error:', err);
-            // 降级：只显示原始 Markdown 解析后的 HTML（不含公式渲染）
-            const rawHtml = marked.parse(markdownString, { async: false });
-            targetElement.innerHTML = rawHtml;
+        const rawHtml = marked.parse(markdownString, { async: false });
+        targetElement.innerHTML = rawHtml;
+        // 触发 MathJax 渲染新添加的内容
+        if (window.MathJax) {
+            await MathJax.typesetPromise([targetElement]);
         }
     }
 
@@ -554,13 +539,6 @@ $Do\\space Not\\space Important$（无妨）
             document.getElementById('articleDetailView').classList.remove('hidden');
             history.pushState({ view: 'detail', id: articleId }, '', `?article=${articleId}`);
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }).catch(err => {
-            console.error('Failed to render article:', err);
-            // 降级：显示错误信息
-            const detailContainer = document.getElementById('articleDetailContent');
-            if (detailContainer) {
-                detailContainer.innerHTML = '<div style="padding:2rem;text-align:center;">文章加载失败，请刷新重试。</div>';
-            }
         });
     }
 
@@ -607,8 +585,7 @@ $Do\\space Not\\space Important$（无妨）
         type();
     }
 
-    // 确保所有资源（包括 MathJax）加载完成后再初始化
-    window.addEventListener('load', () => {
+    document.addEventListener('DOMContentLoaded', () => {
         buildBlogList();
         handleRouting();
         const backBtn = document.getElementById('backToListBtn');
