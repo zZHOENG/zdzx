@@ -4,52 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>中政集团 | 河北正定中学</title>
+
+    <!-- 站点图标 -->
     <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
     <link rel="manifest" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
-    <!-- 引入 Google Fonts 简约字体 -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <!-- 引入 Font Awesome 6 -->
+
+    <!-- 字体与图标库 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- 引入 MathJax 渲染 LaTeX -->
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
-    <script>
-        // 配置 MathJax 支持 $...$ 和 $$...$$ 以及常用命令
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']],
-                packages: ['base', 'ams', 'text', 'color', 'boldsymbol'],
-                macros: {
-                    space: "\\ ",   // 支持 \space
-                    to: "\\to",
-                    sim: "\\sim",
-                    dots: "\\dots",
-                    cdots: "\\cdots"
-                }
-            },
-            options: {
-                ignoreHtmlClass: 'tex2jax_ignore',
-                processHtmlClass: 'tex2jax_process'
-            },
-            startup: {
-                pageReady: () => {
-                    return MathJax.startup.defaultPageReady();
-                }
-            }
-        };
-    </script>
-    <!-- 引入 marked.js 用于 Markdown 解析 -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
     <style>
-        /* 此处保留原有全部样式，未作任何改动 */
+        /* ---------- 全局重置 ---------- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        /* ---------- 主体布局 ---------- */
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(145deg, #f4f7fc 0%, #eef2f7 100%);
@@ -62,26 +36,93 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1280px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
             display: flex;
-            flex-direction: column;
-            flex: 1;          /* 让 container 占满 body 剩余高度 */
+            flex: 1;
+            gap: 2rem;
         }
 
-        #blogListView,
-        #articleDetailView {
-            flex: 1;          /* 内容区域自动伸展，将 footer 推到底部 */
+        /* ---------- 左侧导航栏 ---------- */
+        .sidebar {
+            flex: 0 0 240px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 1.5rem 0.8rem;
+            border: 1px solid rgba(156, 180, 209, 0.3);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+            transition: all 0.2s;
         }
 
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.8rem 1.2rem;
+            margin: 0.3rem 0;
+            border-radius: 28px;
+            font-weight: 500;
+            color: #2c3e66;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item i {
+            width: 1.6rem;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .nav-item:hover {
+            background: rgba(165, 185, 215, 0.3);
+            transform: translateX(4px);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(120deg, #a5c9ff, #c7b9ff);
+            color: #1f2a44;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* 夜间模式左侧栏 */
+        @media (prefers-color-scheme: dark) {
+            .sidebar {
+                background: rgba(30, 36, 48, 0.7);
+                border-color: #2d3748;
+            }
+
+            .nav-item {
+                color: #cbd5e6;
+            }
+
+            .nav-item.active {
+                background: linear-gradient(120deg, #4a5b82, #6c5b9b);
+                color: #ffffff;
+            }
+
+            .nav-item:hover {
+                background: rgba(100, 116, 139, 0.4);
+            }
+        }
+
+        /* ---------- 右侧主内容 ---------- */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* 头部区域（Logo + 打字标题） */
         .header {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2.5rem;
-            padding-bottom: 1.2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
             border-bottom: 1px solid rgba(100, 116, 139, 0.2);
         }
 
@@ -99,6 +140,7 @@
         .title-zone {
             text-align: right;
         }
+
         .typing-title {
             font-size: 2.0rem;
             font-weight: 600;
@@ -113,22 +155,109 @@
             display: inline-block;
             animation: blinkCursor 0.75s step-end infinite;
         }
+
         @keyframes blinkCursor {
-            0%, 100% { border-color: #8b7bb5; }
-            50% { border-color: transparent; }
+
+            0%,
+            100% {
+                border-color: #8b7bb5;
+            }
+
+            50% {
+                border-color: transparent;
+            }
         }
+
         .sub {
             font-size: 0.8rem;
             color: #6f7d95;
             margin-top: 8px;
         }
 
+        /* 外部资源卡片区域 */
+        .resources-section {
+            margin: 1.5rem 0 2rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 28px;
+            padding: 1.2rem 1.5rem;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(156, 180, 209, 0.3);
+        }
+
+        .resources-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e66;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px dashed #b4c8f0;
+        }
+
+        .resources-tip {
+            font-size: 0.7rem;
+            font-weight: normal;
+            color: #8c9bbb;
+        }
+
+        .resources-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .resource-card {
+            flex: 1 1 240px;
+            background: white;
+            border-radius: 20px;
+            padding: 0.8rem 1rem;
+            transition: all 0.2s ease;
+            border: 1px solid #e2e8f0;
+            text-decoration: none;
+            color: #1f2a3e;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-3px);
+            border-color: #a9c0e6;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+        }
+
+        .resource-icon {
+            font-size: 1.8rem;
+            width: 2.2rem;
+            text-align: center;
+        }
+
+        .resource-info {
+            flex: 1;
+        }
+
+        .resource-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .resource-desc {
+            font-size: 0.7rem;
+            color: #6f7d95;
+            word-break: break-all;
+        }
+
+        /* 文章列表卡片 */
         .blog-list {
             display: flex;
             flex-direction: column;
             gap: 1.8rem;
             margin-top: 1rem;
         }
+
         .blog-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(2px);
@@ -136,37 +265,54 @@
             padding: 1.6rem 2rem;
             transition: all 0.25s ease;
             border: 1px solid rgba(156, 180, 209, 0.3);
-            box-shadow: 0 5px 14px rgba(0, 0, 0, 0.02);
             cursor: pointer;
+            position: relative;
         }
+
+        .top-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: #ffb347;
+            color: #2d1f00;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
         .blog-card:hover {
             transform: translateY(-4px);
             background: #ffffff;
-            box-shadow: 0 16px 30px -12px rgba(73, 88, 117, 0.2);
             border-color: #cbddee;
         }
+
         .card-title {
             font-size: 1.7rem;
             font-weight: 600;
-            color: #1e2b3f;
             margin-bottom: 0.6rem;
             letter-spacing: -0.2px;
         }
+
         .card-meta {
             display: flex;
             gap: 1.5rem;
             font-size: 0.85rem;
-            color: #6c7d9e;
             margin-bottom: 1rem;
             align-items: center;
             flex-wrap: wrap;
         }
+
         .card-meta i {
             width: 1.2rem;
             color: #8d9bc2;
         }
+
         .excerpt {
-            color: #2f3e57;
             line-height: 1.55;
             font-size: 0.95rem;
             border-left: 3px solid #b4c8f0;
@@ -174,122 +320,7 @@
             margin-top: 0.5rem;
         }
 
-        .article-detail {
-            background: #ffffffdd;
-            backdrop-filter: blur(4px);
-            border-radius: 32px;
-            padding: 2rem 2rem 2.8rem;
-            box-shadow: 0 10px 25px -12px rgba(0,0,0,0.1);
-            border: 1px solid rgba(165, 185, 215, 0.5);
-        }
-        .detail-header {
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid #e9eef4;
-            padding-bottom: 1.2rem;
-        }
-        .detail-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #1f2e4a, #4a3f73);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 0.8rem;
-        }
-        .detail-meta {
-            display: flex;
-            gap: 1.8rem;
-            font-size: 0.9rem;
-            color: #6f7e9b;
-        }
-        .detail-content {
-            font-size: 1rem;
-            color: #1f2a44;
-            line-height: 1.65;
-        }
-        .detail-content h1, .detail-content h2, .detail-content h3 {
-            margin: 1.5rem 0 0.8rem;
-            font-weight: 600;
-        }
-        .detail-content p {
-            margin: 1rem 0;
-        }
-        .detail-content blockquote {
-            border-left: 4px solid #a9c0e6;
-            background: #f5f9ff;
-            padding: 0.8rem 1.2rem;
-            border-radius: 20px;
-            margin: 1rem 0;
-            color: #2c3d5c;
-        }
-        .detail-content ul,
-        .detail-content ol {
-            padding-left: 1.8rem;
-            margin: 0.8rem 0;
-        }
-        .detail-content li {
-            margin: 0.3rem 0;
-            line-height: 1.6;
-        }
-        .detail-content img {
-            max-width: 100%;
-            border-radius: 24px;
-            margin: 1rem 0;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
-        }
-        .detail-content pre {
-            background: #eef2fa;
-            padding: 1rem;
-            border-radius: 20px;
-            overflow-x: auto;
-        }
-        .detail-content code {
-            background: #eef2fa;
-            padding: 0.2rem 0.4rem;
-            border-radius: 12px;
-            font-size: 0.9em;
-        }
-        .info-box {
-            background: #eef3ff;
-            border-radius: 24px;
-            padding: 1.2rem 1.5rem;
-            margin: 1.2rem 0;
-            border-left: 6px solid #7c93c7;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-        .image-card {
-            background: #f8faff;
-            border-radius: 28px;
-            padding: 0.8rem;
-            text-align: center;
-            margin: 1.4rem 0;
-            border: 1px solid #dce5f2;
-        }
-        .image-card img {
-            border-radius: 20px;
-            margin: 0;
-        }
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #ffffffcc;
-            backdrop-filter: blur(4px);
-            border: 1px solid #bdcbe2;
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #40557a;
-            margin-bottom: 1.8rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-back:hover {
-            background: #fff;
-            border-color: #8fa1c2;
-            color: #253c60;
-        }
+        /* 页脚 */
         footer {
             text-align: center;
             margin-top: 3rem;
@@ -298,300 +329,361 @@
             border-top: 1px solid rgba(128, 147, 175, 0.2);
             padding-top: 2rem;
         }
-        @media (max-width: 700px) {
-            .container {
-                padding: 1rem;
+
+        /* ---------- 夜间模式全局适配 ---------- */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121826;
+                color: #e2e8f0;
             }
+
+            .blog-card,
+            .resources-section {
+                background: rgba(30, 36, 48, 0.85);
+                border-color: #2d3748;
+            }
+
+            .blog-card:hover {
+                background: #1e293b;
+                border-color: #4a5568;
+            }
+
+            .card-title {
+                color: #f1f5f9;
+                background: linear-gradient(120deg, #cbd5e6, #a5b4fc);
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+
+            .card-meta,
+            .sub,
+            .excerpt {
+                color: #cbd5e1;
+            }
+
+            .excerpt {
+                border-left-color: #4a5568;
+            }
+
+            .resource-card {
+                background: #1e293b;
+                border-color: #334155;
+                color: #e2e8f0;
+            }
+
+            .resource-card:hover {
+                background: #2d3a5e;
+                border-color: #818cf8;
+            }
+
+            .resource-desc {
+                color: #9ca3af;
+            }
+
+            .resources-header {
+                color: #cbd5e6;
+                border-bottom-color: #4a5568;
+            }
+
+            footer {
+                color: #6b7280;
+                border-top-color: #2d3748;
+            }
+        }
+
+        /* ---------- 响应式布局（移动端） ---------- */
+        @media (max-width: 860px) {
+            .container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .sidebar {
+                flex: auto;
+                position: static;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                padding: 1rem;
+                justify-content: center;
+            }
+
+            .nav-item {
+                padding: 0.5rem 1rem;
+                margin: 0;
+            }
+
             .header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
             }
+
             .title-zone {
                 text-align: left;
                 width: 100%;
             }
+
             .typing-title {
                 font-size: 1.4rem;
                 white-space: normal;
                 border-right: none;
                 animation: none;
-                padding-right: 0;
             }
+
             .blog-card {
                 padding: 1.2rem;
             }
+
             .card-title {
                 font-size: 1.4rem;
             }
-        }
-        .hidden {
-            display: none;
-        }
-        i, .fas, .far {
-            margin-right: 0.25rem;
+
+            .resources-grid {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
+
 <body>
-<div class="container">
-    <div class="header">
-        <div class="logo-area">
-            <div class="about-image">
-                <img src="https://cdn.luogu.com.cn/upload/image_hosting/ecqjbd5y.png" alt="Logo" width="300" height="80">
+    <div class="container">
+        <!-- 左侧导航栏 -->
+        <aside class="sidebar">
+            <div class="nav-item active" data-category="all">
+                <i class="fas fa-newspaper"></i>
+                <span>全部文章</span>
             </div>
-        </div>
-        <div class="title-zone">
-            <div class="typing-title" id="typingTitle"></div>
-            <div class="sub">中政 ZHOENG · 河北正定中学办事处</div>
-        </div>
-    </div>
+            <div class="nav-item" data-category="公告">
+                <i class="fas fa-file-alt"></i>
+                <span>公告</span>
+            </div>
+            <div class="nav-item" data-category="科技">
+                <i class="fas fa-microchip"></i>
+                <span>科技</span>
+            </div>
+            <div class="nav-item" data-category="记录">
+                <i class="fas fa-layer-group"></i>
+                <span>记录</span>
+            </div>
+            <div class="nav-item" data-category="中政官方">
+                <i class="fas fa-building"></i>
+                <span>中政官方</span>
+            </div>
+            <div class="nav-item" data-category="正中官方">
+                <i class="fas fa-landmark"></i>
+                <span>正中官方</span>
+            </div>
+        </aside>
 
-    <div id="blogListView">
-        <div class="blog-list" id="blogListContainer"></div>
-    </div>
+        <!-- 右侧主内容区 -->
+        <main class="main-content">
+            <!-- 头部：Logo 与 打字标题 -->
+            <div class="header">
+                <div class="logo-area">
+                    <div class="about-image">
+                        <img src="https://cdn.luogu.com.cn/upload/image_hosting/ecqjbd5y.png" alt="中政集团 Logo" width="300" height="80">
+                    </div>
+                </div>
+                <div class="title-zone">
+                    <div class="typing-title" id="typingTitle"></div>
+                    <div class="sub">中政 ZHOENG · 河北正定中学办事处</div>
+                </div>
+            </div>
 
-    <div id="articleDetailView" class="hidden">
-        <div class="btn-back" id="backToListBtn">
-            <i class="fas fa-arrow-left"></i> 返回文章列表
-        </div>
-        <div id="articleDetailContent"></div>
+            <!-- 外部资源链接区域 -->
+            <div class="resources-section">
+                <div class="resources-header">
+                    <i class="fas fa-link"></i> 中政集团 & 河北正定中学
+                    <span class="resources-tip">中政集团 · 中政科技</span>
+                </div>
+                <div class="resources-grid" id="resourcesGrid"></div>
+            </div>
+
+            <!-- 文章列表容器 -->
+            <div id="blogListView">
+                <div class="blog-list" id="blogListContainer"></div>
+            </div>
+        </main>
     </div>
 
     <footer>
-        中政集团 · 中政科技 <span>&copy;</span> 2025-2026 中政 ZHOENG · 河北正定中学办事处 <span>&copy;</span> 2026-2026
+        中政集团 · 中政科技 <span>&copy;</span> 2025-2026
+        中政 ZHOENG · 河北正定中学办事处 <span>&copy;</span> 2026-2026
     </footer>
-</div>
 
-<script>
-    // ---------- 预定义示例文章（内容完全不变） ----------
-    const articles = [
-        {
-            id: 1,
-            title: "正中校园网获取【校园观察】视频指南",
-            author: "ZZA000HAH",
-            date: "2026.04.05",
-            category: "科技",
-            excerpt: "序言：【校园观察】已经出来两期了。本文将介绍【校园观察 第二期】视频的下载方法。本文不好取景，仅在此进行文字描述。",
-            content: `## 序言
+    <script>
+        // ---------- 文章元数据（不含正文，链接指向独立页面）----------
+        const articles = [
+            {
+                id: 1,
+                title: "正中校园网获取【校园观察】视频指南",
+                author: "ZZA000HAH",
+                date: "2026.04.08",
+                category: "科技",
+                top: false,
+                excerpt: "序言：【校园观察】已经出来两期了。本文将介绍【校园观察 第二期】视频的下载方法。本文不好取景，仅在此进行文字描述。",
+                url: "https://zdzx.zhongzheng.tech/tech/tech_article_1.html"
+            },
+        ];
 
-【校园观察】已经出来两期了。
-
-本文将介绍【校园观察 第二期】视频的下载方法。
-
-本文不好取景，仅在此进行文字描述。
-
-## 前言
-
-本文以以下环境进行讲解与说明：
-
-> **环境**：
-> - 正中教室计算机
-> - Windows 10
-> - 希沃浏览器
-
-本文以以下观看方式作为前提：
-
-> **线上观看**：
-> 1. 确保宇宙健在
-> 2. 确保地球健在
-> 3. 确保正中健在
-> 4. 确保正中电力正常
-> 5. 确保正中网络正常
-> 6. 确保正中安排正常
-> 7. 请身处正中教室
-> 8. 检查计算机电源
-> 9. 启动计算机电源
-> 10. 等待计算机启动
-> 11. 打开希沃浏览器
-> 12. 进入正中校园网（不知道网址的请向隔壁班询问）
-> 13. 找到并播放视频
->
-> ---
-> ~~虽然说了和没说一样，但我还是想说一下~~。
-
-## 正文
-
-### 观察
-
-第二期：视频的右下角有三个点（$\\cdots$），点击后发现有一个【$画中画$】选项，然后不用理睬。
-
-第一期：视频的右下角有三个点（$\\cdots$），点击后发现有一个【$下载$】选项和一个【$画中画$】选项。
-
-$Emmmmm\\dots$（天子沉思中）
-
-看第二期时：似乎找不到第一期了。
-
-哦 $\\sim\\sim$
-
-综上，似乎可能大概学校不想使视频外露。
-
-$Do\\space Not\\space Important$（无妨）
-
-> ~~众所周知，并非众所周知。~~
-> 
-> ~~我们发现，正中网现在依然不支持 $https$。~~（真理，但不重要）。
->
-> 我们可以尝试右键 $\\to 检查页面源代码$。
-
-### 方法
-
-1. 当你不小心地点到视频右下角的三个点后发现没有【$下载$】选项时；
-2. 你可以不小心地点一下鼠标右键；
-3. 然而你又不小心地点到了【检查页面源代码】；
-4. 你的手又不小心地摸到了鼠标滑轮，并滚了滚；
-5. 你的手拿着鼠标不小心地晃动了一下并且按了一下左键，导致鼠标箭头不小心地点到了一个后缀为 $.mp4$ 的蓝色字体的链接，并进入了链接；
-6. 然而你又不小心地点到了这个链接中的视频右下角的三个点，发现有【$下载$】选项；
-7. 最后你只需要不小心地点击一下【$下载$】选项即可。
-
-**总结**：真是不小心的一天啊 $\\sim$。
-
-## UPDATE
-
-- 2026.04.05 第一版（$author:\\text{ZZA000HAH}$，$‌version:1.0.0$）。`
-        },
-    ];
-
-    // 配置 marked：允许 HTML 标签，不转义美元符号
-    if (typeof marked !== 'undefined') {
-        marked.setOptions({
-            breaks: true,
-            gfm: true,
-            mangle: false,
-            headerIds: false,
-            highlight: function(code) { return code; }
-        });
-    }
-
-    // 辅助函数：解析 Markdown 并触发 MathJax 渲染
-    async function renderMarkdownWithMathJax(markdownString, targetElement) {
-        if (!markdownString) return;
-        const rawHtml = marked.parse(markdownString, { async: false });
-        targetElement.innerHTML = rawHtml;
-        // 触发 MathJax 渲染新添加的内容
-        if (window.MathJax) {
-            await MathJax.typesetPromise([targetElement]);
-        }
-    }
-
-    // 渲染文章详情页
-    async function renderArticleDetail(article) {
-        const detailContainer = document.getElementById('articleDetailContent');
-        if (!detailContainer) return;
-        const headerHtml = `
-            <div class="detail-header">
-                <div class="detail-title">${escapeHtml(article.title)}</div>
-                <div class="detail-meta">
-                    <span><i class="far fa-user"></i> ${escapeHtml(article.author)}</span>
-                    <span><i class="far fa-calendar-alt"></i> ${escapeHtml(article.date)}</span>
-                    <span><i class="far fa-clock"></i> ${escapeHtml(article.category)}</span>
-                </div>
-            </div>
-            <div class="detail-content" id="detailMarkdownBody"></div>
-        `;
-        detailContainer.innerHTML = headerHtml;
-        const contentDiv = document.getElementById('detailMarkdownBody');
-        await renderMarkdownWithMathJax(article.content, contentDiv);
-    }
-
-    // 防 XSS 辅助
-    function escapeHtml(str) {
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
-
-    // 生成博客列表
-    function buildBlogList() {
-        const container = document.getElementById('blogListContainer');
-        if (!container) return;
-        container.innerHTML = '';
-        articles.forEach(article => {
-            const card = document.createElement('div');
-            card.className = 'blog-card';
-            let excerptText = article.excerpt || '';
-            if (!excerptText) {
-                let plain = article.content.replace(/#|\*|`|>|-|\+/g, '').replace(/\s+/g, ' ').trim();
-                excerptText = plain.substring(0, 130) + (plain.length > 130 ? '…' : '');
+        // 外部资源数据（可自由增删）
+        const externalResources = [
+            {
+                title: "Github 开源",
+                description: "中政 ZHOENG · 河北正定中学办事处 Github 开源",
+                url: "https://github.com/zZHOENG/zdzx",
+                icon: "fab fa-github"
+            },
+          	{
+                title: "Github 开源",
+                description: "中政 ZHOENG · 河北正定中学办事处 Github 开源",
+                url: "https://github.com/zZHOENG/zdzx",
+                icon: "fab fa-github"
+            },
+          	{
+                title: "Github 开源",
+                description: "中政 ZHOENG · 河北正定中学办事处 Github 开源",
+                url: "https://github.com/zZHOENG/zdzx",
+                icon: "fab fa-github"
+            },
+          	{
+                title: "【点击刷新】网站正在开发阶段",
+                description: "如果网页控件点击后没有反应，请刷新页面后重试。",
+                url: "https://zdzx.zhongzheng.tech",
+                icon: "fas fa-cloud"
             }
-            card.innerHTML = `
-                <div class="card-title">${escapeHtml(article.title)}</div>
-                <div class="card-meta">
-                    <span><i class="far fa-user"></i> ${escapeHtml(article.author)}</span>
-                    <span><i class="far fa-calendar-alt"></i> ${escapeHtml(article.date)}</span>
-                    <span><i class="far fa-comment"></i> ${escapeHtml(article.category)}</span>
-                </div>
-                <div class="excerpt">${escapeHtml(excerptText)}</div>
-            `;
-            card.addEventListener('click', () => showArticleDetail(article.id));
-            container.appendChild(card);
-        });
-    }
+        ];
 
-    function showArticleDetail(articleId) {
-        const article = articles.find(a => a.id === articleId);
-        if (!article) return;
-        renderArticleDetail(article).then(() => {
-            document.getElementById('blogListView').classList.add('hidden');
-            document.getElementById('articleDetailView').classList.remove('hidden');
-            history.pushState({ view: 'detail', id: articleId }, '', `?article=${articleId}`);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
+        let currentCategory = "all";   // 默认显示“公告”分类
 
-    function showBlogList() {
-        document.getElementById('blogListView').classList.remove('hidden');
-        document.getElementById('articleDetailView').classList.add('hidden');
-        history.pushState({ view: 'list' }, '', window.location.pathname);
-        buildBlogList();
-    }
+        // ---------- 辅助函数 ----------
+        function escapeHtml(str) {
+            return str.replace(/[&<>]/g, function (m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
 
-    function handleRouting() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const articleId = urlParams.get('article');
-        if (articleId) {
-            const targetArticle = articles.find(a => a.id === parseInt(articleId, 10));
-            if (targetArticle) {
-                document.getElementById('blogListView').classList.add('hidden');
-                document.getElementById('articleDetailView').classList.remove('hidden');
-                renderArticleDetail(targetArticle);
+        // 渲染文章列表
+        function buildBlogList() {
+            const container = document.getElementById('blogListContainer');
+            if (!container) return;
+
+            // 根据当前分类过滤文章
+            let filtered = articles.filter(article => {
+                if (currentCategory === "all") return true;
+                return article.category === currentCategory;
+            });
+
+            // 置顶文章排前
+            filtered.sort((a, b) => (b.top === true ? 1 : 0) - (a.top === true ? 1 : 0));
+
+            container.innerHTML = '';
+            if (filtered.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding: 3rem; color: #6f7d95;">暂无文章，敬请期待。</div>';
                 return;
             }
+
+            filtered.forEach(article => {
+                const card = document.createElement('div');
+                card.className = 'blog-card';
+                const excerptText = article.excerpt || "点击阅读全文...";
+                const topBadge = article.top ? '<div class="top-badge"><i class="fas fa-thumbtack"></i> 置顶</div>' : '';
+
+                card.innerHTML = topBadge + `
+                    <div class="card-title">${escapeHtml(article.title)}</div>
+                    <div class="card-meta">
+                        <span><i class="far fa-user"></i> ${escapeHtml(article.author)}</span>
+                        <span><i class="far fa-calendar-alt"></i> ${escapeHtml(article.date)}</span>
+                        <span><i class="far fa-comment"></i> ${escapeHtml(article.category)}</span>
+                    </div>
+                    <div class="excerpt">${escapeHtml(excerptText)}</div>
+                `;
+
+                // 点击跳转到独立文章页面
+                card.addEventListener('click', () => {
+                    window.location.href = article.url;
+                });
+                container.appendChild(card);
+            });
         }
-        document.getElementById('blogListView').classList.remove('hidden');
-        document.getElementById('articleDetailView').classList.add('hidden');
-        buildBlogList();
-    }
 
-    window.addEventListener('popstate', () => handleRouting());
+        // 渲染外部资源卡片
+        function buildResourcesGrid() {
+            const container = document.getElementById('resourcesGrid');
+            if (!container) return;
+            container.innerHTML = '';
+            externalResources.forEach(res => {
+                const card = document.createElement('a');
+                card.className = 'resource-card';
+                card.href = res.url;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.innerHTML = `
+                    <div class="resource-icon"><i class="${res.icon}"></i></div>
+                    <div class="resource-info">
+                        <div class="resource-title">${escapeHtml(res.title)}</div>
+                        <div class="resource-desc">${escapeHtml(res.description)}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
 
-    function typeWriterEffect() {
-        const titleElement = document.getElementById('typingTitle');
-        const fullText = "中政集团 · 中政科技";
-        let i = 0;
-        titleElement.textContent = '';
-        function type() {
-            if (i < fullText.length) {
-                titleElement.textContent += fullText.charAt(i);
-                i++;
-                setTimeout(type, 100);
-            } else {
-                titleElement.style.borderRightColor = 'transparent';
+        // 设置导航栏激活状态
+        function setActiveNav(category) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                if (item.getAttribute('data-category') === category) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        // 打字机效果
+        function typeWriterEffect() {
+            const titleElement = document.getElementById('typingTitle');
+            const fullText = "中政集团 · 中政科技";
+            let i = 0;
+            titleElement.textContent = '';
+            function type() {
+                if (i < fullText.length) {
+                    titleElement.textContent += fullText.charAt(i);
+                    i++;
+                    setTimeout(type, 100);
+                } else {
+                    titleElement.style.borderRightColor = 'transparent';
+                }
             }
+            type();
         }
-        type();
-    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        buildBlogList();
-        handleRouting();
-        const backBtn = document.getElementById('backToListBtn');
-        if (backBtn) backBtn.addEventListener('click', showBlogList);
-        typeWriterEffect();
-    });
-</script>
+        // 导航栏点击事件初始化
+        function initNavigation() {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const category = item.getAttribute('data-category');
+                    if (category === currentCategory) return;
+                    currentCategory = category;
+                    setActiveNav(category);
+                    buildBlogList();    // 刷新文章列表
+                });
+            });
+        }
+
+        // 页面加载完成后执行
+        window.addEventListener('load', () => {
+            buildResourcesGrid();
+            buildBlogList();
+            initNavigation();
+            typeWriterEffect();
+        });
+    </script>
 </body>
 </html>
