@@ -55,6 +55,58 @@
             flex: 1;
         }
 
+        /* ===== 头部样式（与主页一致） ===== */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+        }
+
+        .logo-area {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-image img {
+            border-radius: 12px;
+        }
+
+        .title-zone {
+            text-align: right;
+        }
+
+        .typing-title {
+            font-size: 2.0rem;
+            font-weight: 600;
+            background: linear-gradient(120deg, #3b4b6e, #6c5b9b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+            border-right: 3px solid #8b7bb5;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: blinkCursor 0.75s step-end infinite;
+        }
+
+        @keyframes blinkCursor {
+            0%, 100% { border-color: #8b7bb5; }
+            50% { border-color: transparent; }
+        }
+
+        .sub {
+            font-size: 0.8rem;
+            color: #6f7d95;
+            margin-top: 8px;
+        }
+
         /* ===== 返回按钮 ===== */
         .btn-back {
             display: inline-flex;
@@ -100,12 +152,10 @@
         .detail-title {
             font-size: 2.2rem;
             font-weight: 700;
-            /* 后备颜色：当 background-clip 不支持时显示此颜色 */
             color: #1f2e4a;
             background: linear-gradient(135deg, #1f2e4a, #4a3f73);
             background-clip: text;
             -webkit-background-clip: text;
-            /* 使用 text-fill-color 实现透明效果，配合 background-clip */
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.8rem;
         }
@@ -214,6 +264,21 @@
             .container {
                 padding: 1rem;
             }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .title-zone {
+                text-align: left;
+                width: 100%;
+            }
+            .typing-title {
+                font-size: 1.4rem;
+                white-space: normal;
+                border-right: none;
+                animation: none;
+            }
             .detail-title {
                 font-size: 1.6rem;
             }
@@ -232,7 +297,6 @@
             }
 
             .detail-title {
-                /* 暗色模式下的后备颜色与渐变 */
                 color: #cbd5e6;
                 background: linear-gradient(135deg, #cbd5e6, #a5b4fc);
                 -webkit-text-fill-color: transparent;
@@ -276,17 +340,37 @@
                 border-color: #818cf8;
                 color: white;
             }
+
+            .header {
+                border-bottom-color: rgba(100, 116, 139, 0.3);
+            }
+            .sub {
+                color: #9ca3af;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- 头部区域（与主页完全一致） -->
+        <div class="header">
+            <div class="logo-area">
+                <div class="about-image">
+                    <img src="https://cdn.luogu.com.cn/upload/image_hosting/ecqjbd5y.png" alt="中政集团 Logo" width="300" height="80">
+                </div>
+            </div>
+            <div class="title-zone">
+                <div class="typing-title" id="typingTitle"></div>
+                <div class="sub">中政 ZHOENG · 河北正定中学办事处</div>
+            </div>
+        </div>
+
         <!-- 返回首页链接 -->
         <a class="btn-back" href="https://zdzx.zhongzheng.tech/">
             <i class="fas fa-arrow-left"></i> 返回首页
         </a>
 
-        <!-- 文章详情容器：头部由 JS 动态生成，正文通过 fetch 渲染 -->
+        <!-- 文章详情容器 -->
         <div id="articleDetailContent" class="article-detail"></div>
 
         <footer>
@@ -299,7 +383,7 @@
         (function() {
             "use strict";
 
-            // ===== 文章元数据（用于显示头部信息） =====
+            // ===== 文章元数据 =====
             const articleMeta = {
                 title: "正中校园网获取【校园观察】视频指南",
                 author: "ZZA000HAH",
@@ -307,29 +391,39 @@
                 category: "科技"
             };
 
-            // 外部 Markdown 文件路径
+            // 外部 Markdown 文件路径（请根据实际存放位置调整）
             const contentFilePath = "https://zdzx.zhongzheng.tech/tech/tech_article_md_1.md";
 
-            /**
-             * 简单的 HTML 转义，防止 XSS
-             */
+            // 简单的 HTML 转义
             function escapeHtml(str) {
-                const map = {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;'
-                };
+                const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;' };
                 return String(str).replace(/[&<>]/g, c => map[c]);
             }
 
-            /**
-             * 渲染文章：生成头部并加载外部 Markdown 内容
-             */
+            // 打字机效果
+            function typeWriterEffect() {
+                const titleElement = document.getElementById('typingTitle');
+                if (!titleElement) return;
+                const fullText = "中政集团 · 中政科技";
+                let i = 0;
+                titleElement.textContent = '';
+                function type() {
+                    if (i < fullText.length) {
+                        titleElement.textContent += fullText.charAt(i);
+                        i++;
+                        setTimeout(type, 100);
+                    } else {
+                        titleElement.style.borderRightColor = 'transparent';
+                    }
+                }
+                type();
+            }
+
+            // 渲染文章内容
             async function renderArticle() {
                 const container = document.getElementById('articleDetailContent');
                 if (!container) return;
 
-                // 构建文章头部 HTML
                 const headerHtml = `
                     <div class="detail-header">
                         <div class="detail-title">${escapeHtml(articleMeta.title)}</div>
@@ -344,20 +438,12 @@
                 container.innerHTML = headerHtml;
 
                 const contentDiv = document.getElementById('detailMarkdownBody');
-
                 try {
-                    // 获取 Markdown 文件内容
                     const response = await fetch(contentFilePath);
-                    if (!response.ok) {
-                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                    }
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
                     const markdown = await response.text();
-
-                    // 使用 marked 解析为 HTML
                     const rawHtml = marked.parse(markdown, { async: false });
                     contentDiv.innerHTML = rawHtml;
-
-                    // 如果 MathJax 可用，重新渲染数学公式
                     if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
                         await MathJax.typesetPromise([contentDiv]);
                     }
@@ -367,8 +453,11 @@
                 }
             }
 
-            // 页面加载完成后开始渲染
-            window.addEventListener('load', renderArticle);
+            // 页面初始化
+            window.addEventListener('load', () => {
+                typeWriterEffect();
+                renderArticle();
+            });
         })();
     </script>
 </body>
