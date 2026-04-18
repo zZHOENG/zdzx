@@ -16,7 +16,7 @@
       "date": "2026.04.18",
       "category": "科技",
       "top": false,
-      "excerpt": "序言：设想一下：当你身处正中教室，你面前是正中教室的希沃大屏，你试图运行一个 Python 程序，但是解释器显示：$\text{ModuleNotFoundError: No module named 'xxx'}$。",
+      "excerpt": "序言：设想一下：当你身处正中教室，你面前是正中教室的希沃大屏，你试图运行一个 Python 程序，但是解释器显示：“ModuleNotFoundError: No module named 'xxx'”。",
       "url": "https://zdzx.zhongzheng.tech/tech/tech_article_2"
     }
 ]
