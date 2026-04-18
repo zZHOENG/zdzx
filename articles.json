@@ -6,7 +6,7 @@
       "date": "2026.04.08",
       "category": "科技",
       "top": false,
-      "excerpt": "序言：【校园观察】已经出来两期了。本文将介绍【校园观察 第二期】视频的下载方法。本文不好取景，仅在此进行文字描述。",
+      "excerpt": "序言：【校园观察】已经出来两期了，本文将介绍【校园观察 第二期】视频的下载方法，这种方法可能在以后依然适用。",
       "url": "https://zdzx.zhongzheng.tech/tech/tech_article_1"
     },
     {
@@ -16,7 +16,17 @@
       "date": "2026.04.18",
       "category": "科技",
       "top": false,
-      "excerpt": "序言：设想一下：当你身处正中教室，你面前是正中教室的希沃大屏，你试图运行一个 Python 程序，但是解释器显示：“ModuleNotFoundError: No module named 'xxx'”。",
+      "excerpt": "序言：当你身处正中教室，试图使用教室中的希沃大屏运行一个 Python 程序，但是需要第三方库的支持，请看此文。",
       "url": "https://zdzx.zhongzheng.tech/tech/tech_article_2"
+    },
+    {
+      "id": 3,
+      "title": "【公告】网站全站主公告",
+      "author": "ZZA000HAH",
+      "date": "2026.04.18",
+      "category": "公告",
+      "top": true,
+      "excerpt": "【公告】：zdzx.zhongzheng.tech 网站全站主公告",
+      "url": "https://zdzx.zhongzheng.tech/notice/notice_main"
     }
 ]
