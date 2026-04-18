@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>正中校园网获取【校园观察】视频指南 | 中政集团</title>
+    <title>文章详情 · 中政集团</title>
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
@@ -11,7 +11,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
 
     <!-- 字体与图标库 -->
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- MathJax 配置与脚本 -->
@@ -75,6 +74,8 @@
 
         .about-image img {
             border-radius: 12px;
+            max-width: 300px;
+            height: auto;
         }
 
         .title-zone {
@@ -152,7 +153,6 @@
         .detail-title {
             font-size: 2.2rem;
             font-weight: 700;
-            color: #1f2e4a;
             background: linear-gradient(135deg, #1f2e4a, #4a3f73);
             background-clip: text;
             -webkit-background-clip: text;
@@ -247,6 +247,19 @@
         .image-card img {
             border-radius: 20px;
             margin: 0;
+        }
+
+        /* ===== 错误提示 ===== */
+        .error-message {
+            color: #b91c1c;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #6f7d95;
         }
 
         /* ===== 页脚 ===== */
@@ -352,11 +365,11 @@
 </head>
 <body>
     <div class="container">
-        <!-- 头部区域（与主页完全一致） -->
+        <!-- 头部区域（与主页一致） -->
         <div class="header">
             <div class="logo-area">
                 <div class="about-image">
-                    <img src="https://cdn.luogu.com.cn/upload/image_hosting/ecqjbd5y.png" alt="中政集团 Logo" width="300" height="80">
+                    <img src="https://zdzx.zhongzheng.tech/favicon_2.png" alt="中政集团 Logo" width="300" height="80">
                 </div>
             </div>
             <div class="title-zone">
@@ -366,12 +379,14 @@
         </div>
 
         <!-- 返回首页链接 -->
-        <a class="btn-back" href="https://zdzx.zhongzheng.tech/">
+        <a class="btn-back" href="../../">
             <i class="fas fa-arrow-left"></i> 返回首页
         </a>
 
         <!-- 文章详情容器 -->
-        <div id="articleDetailContent" class="article-detail"></div>
+        <div id="articleDetailContent" class="article-detail">
+            <div class="loading"><i class="fas fa-spinner fa-pulse"></i> 正在加载文章元数据…</div>
+        </div>
 
         <footer>
             中政集团 · 中政科技 <span>&copy;</span> 2025-2026<br>
@@ -382,17 +397,6 @@
     <script>
         (function() {
             "use strict";
-
-            // ===== 文章元数据 =====
-            const articleMeta = {
-                title: "正中校园网获取【校园观察】视频指南",
-                author: "ZZA000HAH",
-                date: "2026.04.08",
-                category: "科技"
-            };
-
-            // 外部 Markdown 文件路径（请根据实际存放位置调整）
-            const contentFilePath = "https://zdzx.zhongzheng.tech/tech/tech_article_md_1.md";
 
             // 简单的 HTML 转义
             function escapeHtml(str) {
@@ -419,37 +423,84 @@
                 type();
             }
 
+            // 加载 meta.json
+            async function loadArticleMeta() {
+                try {
+                    const response = await fetch('./meta.json');
+                    if (!response.ok) throw new Error(`无法加载 meta.json (HTTP ${response.status})`);
+                    return await response.json();
+                } catch (error) {
+                    console.error('加载元数据失败:', error);
+                    throw error;
+                }
+            }
+
             // 渲染文章内容
             async function renderArticle() {
                 const container = document.getElementById('articleDetailContent');
                 if (!container) return;
 
-                const headerHtml = `
-                    <div class="detail-header">
-                        <div class="detail-title">${escapeHtml(articleMeta.title)}</div>
-                        <div class="detail-meta">
-                            <span><i class="far fa-user"></i> ${escapeHtml(articleMeta.author)}</span>
-                            <span><i class="far fa-calendar-alt"></i> ${escapeHtml(articleMeta.date)}</span>
-                            <span><i class="far fa-clock"></i> ${escapeHtml(articleMeta.category)}</span>
-                        </div>
-                    </div>
-                    <div class="detail-content" id="detailMarkdownBody"></div>
-                `;
-                container.innerHTML = headerHtml;
-
-                const contentDiv = document.getElementById('detailMarkdownBody');
                 try {
-                    const response = await fetch(contentFilePath);
-                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                    const markdown = await response.text();
-                    const rawHtml = marked.parse(markdown, { async: false });
+                    // 1. 加载元数据
+                    const meta = await loadArticleMeta();
+                    
+                    // 更新页面标题
+                    document.title = `${meta.title} | 中政集团`;
+
+                    // 2. 渲染文章头部
+                    const headerHtml = `
+                        <div class="detail-header">
+                            <div class="detail-title">${escapeHtml(meta.title)}</div>
+                            <div class="detail-meta">
+                                <span><i class="far fa-user"></i> ${escapeHtml(meta.author)}</span>
+                                <span><i class="far fa-calendar-alt"></i> ${escapeHtml(meta.date)}</span>
+                                <span><i class="far fa-folder"></i> ${escapeHtml(meta.category)}</span>
+                            </div>
+                        </div>
+                        <div class="detail-content" id="detailMarkdownBody">
+                            <div class="loading"><i class="fas fa-spinner fa-pulse"></i> 加载正文中…</div>
+                        </div>
+                    `;
+                    container.innerHTML = headerHtml;
+                    const contentDiv = document.getElementById('detailMarkdownBody');
+
+                    // 3. 确定 Markdown 文件路径（优先使用 meta.markdown，否则默认 ./article.md）
+                    let markdownPath = meta.markdown;
+                    if (!markdownPath) {
+                        markdownPath = './article.md';
+                        console.warn('meta.json 未指定 markdown 字段，使用默认路径: ./article.md');
+                    }
+
+                    // 4. 加载 Markdown 正文
+                    let markdownText;
+                    try {
+                        const mdResponse = await fetch(markdownPath);
+                        if (!mdResponse.ok) throw new Error(`HTTP ${mdResponse.status}`);
+                        markdownText = await mdResponse.text();
+                    } catch (mdError) {
+                        console.error('Markdown 加载失败:', mdError);
+                        contentDiv.innerHTML = `<div class="error-message">
+                            <i class="fas fa-exclamation-triangle"></i> 文章内容加载失败：${escapeHtml(mdError.message)}<br>
+                            <small>路径：${escapeHtml(markdownPath)}</small>
+                        </div>`;
+                        return;
+                    }
+
+                    // 5. 渲染 Markdown
+                    const rawHtml = marked.parse(markdownText, { async: false });
                     contentDiv.innerHTML = rawHtml;
+
+                    // 6. 触发 MathJax 渲染
                     if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
                         await MathJax.typesetPromise([contentDiv]);
                     }
-                } catch (err) {
-                    console.error('文章加载失败:', err);
-                    contentDiv.innerHTML = '<p style="color: red;">文章内容加载失败，请稍后重试。</p>';
+
+                } catch (error) {
+                    console.error('文章渲染失败:', error);
+                    container.innerHTML = `<div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i> 加载失败：${escapeHtml(error.message)}<br>
+                        <small>请确保当前目录下存在 meta.json 文件</small>
+                    </div>`;
                 }
             }
 
