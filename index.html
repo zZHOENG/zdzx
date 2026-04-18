@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>中政集团 | 河北正定中学</title>
+    <title>中政集团 · 河北正定中学</title>
 
     <!-- 站点图标 -->
     <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
@@ -12,7 +12,6 @@
     <link rel="manifest" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
 
     <!-- 字体与图标库 -->
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
@@ -23,7 +22,6 @@
             box-sizing: border-box;
         }
 
-        /* ---------- 主体布局 ---------- */
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(145deg, #f4f7fc 0%, #eef2f7 100%);
@@ -44,7 +42,7 @@
             gap: 2rem;
         }
 
-        /* ---------- 左侧导航栏 ---------- */
+        /* 左侧导航栏 */
         .sidebar {
             flex: 0 0 240px;
             background: rgba(255, 255, 255, 0.6);
@@ -88,34 +86,29 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
 
-        /* 夜间模式左侧栏 */
         @media (prefers-color-scheme: dark) {
             .sidebar {
                 background: rgba(30, 36, 48, 0.7);
                 border-color: #2d3748;
             }
-
             .nav-item {
                 color: #cbd5e6;
             }
-
             .nav-item.active {
                 background: linear-gradient(120deg, #4a5b82, #6c5b9b);
                 color: #ffffff;
             }
-
             .nav-item:hover {
                 background: rgba(100, 116, 139, 0.4);
             }
         }
 
-        /* ---------- 右侧主内容 ---------- */
+        /* 右侧主内容 */
         .main-content {
             flex: 1;
             min-width: 0;
         }
 
-        /* 头部区域（Logo + 打字标题） */
         .header {
             display: flex;
             flex-wrap: wrap;
@@ -157,15 +150,8 @@
         }
 
         @keyframes blinkCursor {
-
-            0%,
-            100% {
-                border-color: #8b7bb5;
-            }
-
-            50% {
-                border-color: transparent;
-            }
+            0%, 100% { border-color: #8b7bb5; }
+            50% { border-color: transparent; }
         }
 
         .sub {
@@ -174,7 +160,7 @@
             margin-top: 8px;
         }
 
-        /* 外部资源卡片区域 */
+        /* 外部资源卡片 */
         .resources-section {
             margin: 1.5rem 0 2rem;
             background: rgba(255, 255, 255, 0.5);
@@ -250,7 +236,7 @@
             word-break: break-all;
         }
 
-        /* 文章列表卡片 */
+        /* 文章列表 */
         .blog-list {
             display: flex;
             flex-direction: column;
@@ -282,7 +268,7 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .blog-card:hover {
@@ -320,7 +306,14 @@
             margin-top: 0.5rem;
         }
 
-        /* 页脚 */
+        /* 加载状态 */
+        .loading-placeholder {
+            text-align: center;
+            padding: 3rem;
+            color: #6f7d95;
+            font-size: 1rem;
+        }
+
         footer {
             text-align: center;
             margin-top: 3rem;
@@ -330,24 +323,20 @@
             padding-top: 2rem;
         }
 
-        /* ---------- 夜间模式全局适配 ---------- */
+        /* 夜间模式 */
         @media (prefers-color-scheme: dark) {
             body {
                 background: #121826;
                 color: #e2e8f0;
             }
-
-            .blog-card,
-            .resources-section {
+            .blog-card, .resources-section {
                 background: rgba(30, 36, 48, 0.85);
                 border-color: #2d3748;
             }
-
             .blog-card:hover {
                 background: #1e293b;
                 border-color: #4a5568;
             }
-
             .card-title {
                 color: #f1f5f9;
                 background: linear-gradient(120deg, #cbd5e6, #a5b4fc);
@@ -355,50 +344,40 @@
                 -webkit-background-clip: text;
                 color: transparent;
             }
-
-            .card-meta,
-            .sub,
-            .excerpt {
+            .card-meta, .sub, .excerpt {
                 color: #cbd5e1;
             }
-
             .excerpt {
                 border-left-color: #4a5568;
             }
-
             .resource-card {
                 background: #1e293b;
                 border-color: #334155;
                 color: #e2e8f0;
             }
-
             .resource-card:hover {
                 background: #2d3a5e;
                 border-color: #818cf8;
             }
-
             .resource-desc {
                 color: #9ca3af;
             }
-
             .resources-header {
                 color: #cbd5e6;
                 border-bottom-color: #4a5568;
             }
-
             footer {
                 color: #6b7280;
                 border-top-color: #2d3748;
             }
         }
 
-        /* ---------- 响应式布局（移动端） ---------- */
+        /* 响应式 */
         @media (max-width: 860px) {
             .container {
                 flex-direction: column;
                 gap: 1.5rem;
             }
-
             .sidebar {
                 flex: auto;
                 position: static;
@@ -408,159 +387,152 @@
                 padding: 1rem;
                 justify-content: center;
             }
-
             .nav-item {
                 padding: 0.5rem 1rem;
                 margin: 0;
             }
-
             .header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
             }
-
             .title-zone {
                 text-align: left;
                 width: 100%;
             }
-
             .typing-title {
                 font-size: 1.4rem;
                 white-space: normal;
                 border-right: none;
                 animation: none;
             }
-
             .blog-card {
                 padding: 1.2rem;
             }
-
             .card-title {
                 font-size: 1.4rem;
             }
-
             .resources-grid {
                 flex-direction: column;
             }
         }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <!-- 左侧导航栏 -->
-        <aside class="sidebar">
-            <div class="nav-item active" data-category="all">
-                <i class="fas fa-newspaper"></i>
-                <span>全部文章</span>
-            </div>
-            <div class="nav-item" data-category="公告">
-                <i class="fas fa-file-alt"></i>
-                <span>公告</span>
-            </div>
-            <div class="nav-item" data-category="科技">
-                <i class="fas fa-microchip"></i>
-                <span>科技</span>
-            </div>
-            <div class="nav-item" data-category="记录">
-                <i class="fas fa-layer-group"></i>
-                <span>记录</span>
-            </div>
-            <div class="nav-item" data-category="中政官方">
-                <i class="fas fa-building"></i>
-                <span>中政官方</span>
-            </div>
-            <div class="nav-item" data-category="正中官方">
-                <i class="fas fa-landmark"></i>
-                <span>正中官方</span>
-            </div>
-        </aside>
+<div class="container">
+    <!-- 左侧导航栏 (分类筛选) -->
+    <aside class="sidebar">
+        <div class="nav-item active" data-category="all">
+            <i class="fas fa-newspaper"></i>
+            <span>全部文章</span>
+        </div>
+        <div class="nav-item" data-category="公告">
+            <i class="fas fa-file-alt"></i>
+            <span>公告</span>
+        </div>
+        <div class="nav-item" data-category="科技">
+            <i class="fas fa-microchip"></i>
+            <span>科技</span>
+        </div>
+        <div class="nav-item" data-category="记录">
+            <i class="fas fa-layer-group"></i>
+            <span>记录</span>
+        </div>
+        <div class="nav-item" data-category="中政官方">
+            <i class="fas fa-building"></i>
+            <span>中政官方</span>
+        </div>
+        <div class="nav-item" data-category="正中官方">
+            <i class="fas fa-landmark"></i>
+            <span>正中官方</span>
+        </div>
+        <div class="nav-item" data-category="NOI Plus">
+            <i class="fas fa-code"></i>
+            <span>NOI Plus</span>
+        </div>
+        <div class="nav-item" data-category="公益宣传">
+            <i class="fas fa-child"></i>
+            <span>公益宣传</span>
+        </div>
+        <div class="nav-item" data-category="广告宣传">
+            <i class="fas fa-rectangle-ad"></i>
+            <span>广告宣传</span>
+        </div>
+    </aside>
 
-        <!-- 右侧主内容区 -->
-        <main class="main-content">
-            <!-- 头部：Logo 与 打字标题 -->
-            <div class="header">
-                <div class="logo-area">
-                    <div class="about-image">
-                        <img src="https://zdzx.zhongzheng.tech/favicon_2.png" alt="河北正定中学" width="300" height="80">
-                    </div>
+    <!-- 右侧主内容区 -->
+    <main class="main-content">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="logo-area">
+                <div class="about-image">
+                    <img src="https://zdzx.zhongzheng.tech/favicon_2.png" alt="河北正定中学" width="300" height="80">
                 </div>
-                <div class="title-zone">
-                    <div class="typing-title" id="typingTitle"></div>
-                    <div class="sub">中政 ZHOENG · 河北正定中学办事处</div>
+            </div>
+            <div class="title-zone">
+                <div class="typing-title" id="typingTitle"></div>
+                <div class="sub">中政 ZHOENG · 河北正定中学办事处</div>
+            </div>
+        </div>
+
+        <!-- 外部资源链接区域（固定） -->
+        <div class="resources-section">
+            <div class="resources-header">
+                <i class="fas fa-link"></i> 中政集团 & 河北正定中学
+                <span class="resources-tip">中政集团 · 中政科技</span>
+            </div>
+            <div class="resources-grid" id="resourcesGrid"></div>
+        </div>
+
+        <!-- 文章列表容器 -->
+        <div id="blogListView">
+            <div class="blog-list" id="blogListContainer">
+                <div class="loading-placeholder">
+                    <i class="fas fa-spinner fa-pulse"></i> 正在加载文章列表...
                 </div>
             </div>
+        </div>
+    </main>
+</div>
 
-            <!-- 外部资源链接区域 -->
-            <div class="resources-section">
-                <div class="resources-header">
-                    <i class="fas fa-link"></i> 中政集团 & 河北正定中学
-                    <span class="resources-tip">中政集团 · 中政科技</span>
-                </div>
-                <div class="resources-grid" id="resourcesGrid"></div>
-            </div>
+<footer>
+    中政集团 · 中政科技 <span>&copy;</span> 2025-2026<br>
+    中政 ZHOENG · 河北正定中学办事处 <span>&copy;</span> 2026-2026
+</footer>
 
-            <!-- 文章列表容器 -->
-            <div id="blogListView">
-                <div class="blog-list" id="blogListContainer"></div>
-            </div>
-        </main>
-    </div>
+<script>
+    (function() {
+        "use strict";
 
-    <footer>
-        中政集团 · 中政科技 <span>&copy;</span> 2025-2026<br>
-        中政 ZHOENG · 河北正定中学办事处 <span>&copy;</span> 2026-2026
-    </footer>
+        // ---------- 配置：文章数据源 (JSON 文件) ----------
+        // 您只需维护这个 JSON 文件，即可更新首页文章列表，无需改动主页 HTML。
+        const ARTICLES_JSON_URL = './articles.json';   // 建议放在仓库根目录
 
-    <script>
-        // ---------- 文章元数据（不含正文，链接指向独立页面）----------
-        const articles = [
-            {
-                id: 1,
-                title: "正中校园网获取【校园观察】视频指南",
-                author: "ZZA000HAH",
-                date: "2026.04.08",
-                category: "科技",
-                top: false,
-                excerpt: "序言：【校园观察】已经出来两期了。本文将介绍【校园观察 第二期】视频的下载方法。本文不好取景，仅在此进行文字描述。",
-                url: "https://zdzx.zhongzheng.tech/tech/tech_article_1"
-            },
-        ];
+        // ---------- 全局状态 ----------
+        let articlesData = [];                // 从 JSON 加载的文章数组
+        let currentCategory = 'all';          // 当前选中的分类
+        let isLoading = false;
 
-        // 外部资源数据（可自由增删）
+        // ---------- 固定外部资源 (不变) ----------
         const externalResources = [
-            {
-                title: "Github 开源",
-                description: "中政 ZHOENG · 河北正定中学办事处",
-                url: "https://github.com/zZHOENG/zdzx",
-                icon: "fab fa-github"
-            },
-          	{
-                title: "网站开发者",
-                description: "zdzx.zhongzheng.tech 网站开发者",
-                url: "https://zdzx.zhongzheng.tech/help/developer",
-                icon: "fas fa-code"
-            },
-          	{
-                title: "反馈及投稿",
-                description: "网站相关问题反馈与文章投稿",
-                url: "https://zdzx.zhongzheng.tech/help/feedback",
-                icon: "fas fa-comments"
-            },
-          	{
-                title: "【点击刷新】网站正在开发阶段",
-                description: "如果网页控件点击后没有反应，请刷新页面后重试。",
-                url: "https://zdzx.zhongzheng.tech",
-                icon: "fas fa-cloud"
-            }
+            { title: "Github 开源", description: "中政 ZHOENG · 河北正定中学办事处", url: "https://github.com/zZHOENG/zdzx", icon: "fab fa-github" },
+            { title: "网站开发者", description: "zdzx.zhongzheng.tech 网站开发者", url: "https://zdzx.zhongzheng.tech/help/developer", icon: "fas fa-code" },
+            { title: "反馈及投稿", description: "网站相关问题反馈与文章投稿", url: "https://zdzx.zhongzheng.tech/help/feedback", icon: "fas fa-comments" },
+            { title: "用户协议", description: "网站帮助 · 用户协议", url: "https://zdzx.zhongzheng.tech/help/useragreement", icon: "fas fa-newspaper" },
+            { title: "隐私政策", description: "网站帮助 · 隐私政策", url: "https://zdzx.zhongzheng.tech/help/privacypolicy", icon: "fas fa-layer-group" },
+            { title: "免责声明", description: "网站帮助 · 免责声明", url: "https://zdzx.zhongzheng.tech/help/disclaimer", icon: "fas fa-file-alt" }
         ];
 
-        let currentCategory = "all";   // 默认显示“公告”分类
+        // ---------- DOM 元素 ----------
+        const blogListContainer = document.getElementById('blogListContainer');
+        const resourcesGrid = document.getElementById('resourcesGrid');
+        const navItems = document.querySelectorAll('.nav-item');
+        const typingTitleEl = document.getElementById('typingTitle');
 
-        // ---------- 辅助函数 ----------
+        // ---------- 辅助函数：转义 HTML ----------
         function escapeHtml(str) {
-            return str.replace(/[&<>]/g, function (m) {
+            if (!str) return '';
+            return String(str).replace(/[&<>]/g, function(m) {
                 if (m === '&') return '&amp;';
                 if (m === '<') return '&lt;';
                 if (m === '>') return '&gt;';
@@ -568,55 +540,10 @@
             });
         }
 
-        // 渲染文章列表
-        function buildBlogList() {
-            const container = document.getElementById('blogListContainer');
-            if (!container) return;
-
-            // 根据当前分类过滤文章
-            let filtered = articles.filter(article => {
-                if (currentCategory === "all") return true;
-                return article.category === currentCategory;
-            });
-
-            // 置顶文章排前
-            filtered.sort((a, b) => (b.top === true ? 1 : 0) - (a.top === true ? 1 : 0));
-
-            container.innerHTML = '';
-            if (filtered.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding: 3rem; color: #6f7d95;">暂无文章，敬请期待。</div>';
-                return;
-            }
-
-            filtered.forEach(article => {
-                const card = document.createElement('div');
-                card.className = 'blog-card';
-                const excerptText = article.excerpt || "点击阅读全文...";
-                const topBadge = article.top ? '<div class="top-badge"><i class="fas fa-thumbtack"></i> 置顶</div>' : '';
-
-                card.innerHTML = topBadge + `
-                    <div class="card-title">${escapeHtml(article.title)}</div>
-                    <div class="card-meta">
-                        <span><i class="far fa-user"></i> ${escapeHtml(article.author)}</span>
-                        <span><i class="far fa-calendar-alt"></i> ${escapeHtml(article.date)}</span>
-                        <span><i class="far fa-comment"></i> ${escapeHtml(article.category)}</span>
-                    </div>
-                    <div class="excerpt">${escapeHtml(excerptText)}</div>
-                `;
-
-                // 点击跳转到独立文章页面
-                card.addEventListener('click', () => {
-                    window.location.href = article.url;
-                });
-                container.appendChild(card);
-            });
-        }
-
-        // 渲染外部资源卡片
-        function buildResourcesGrid() {
-            const container = document.getElementById('resourcesGrid');
-            if (!container) return;
-            container.innerHTML = '';
+        // ---------- 渲染外部资源卡片 (固定) ----------
+        function renderResources() {
+            if (!resourcesGrid) return;
+            resourcesGrid.innerHTML = '';
             externalResources.forEach(res => {
                 const card = document.createElement('a');
                 card.className = 'resource-card';
@@ -630,14 +557,106 @@
                         <div class="resource-desc">${escapeHtml(res.description)}</div>
                     </div>
                 `;
-                container.appendChild(card);
+                resourcesGrid.appendChild(card);
             });
         }
 
-        // 设置导航栏激活状态
+        // ---------- 根据 articlesData 和 currentCategory 渲染文章卡片 ----------
+        function renderBlogList() {
+            if (!blogListContainer) return;
+
+            // 如果还没有数据 (可能还在加载) 显示加载状态
+            if (!articlesData || articlesData.length === 0) {
+                // 但如果是加载中会显示loading；这里再处理一次避免空白
+                if (!isLoading) {
+                    blogListContainer.innerHTML = '<div class="loading-placeholder"><i class="fas fa-inbox"></i> 暂无文章，敬请期待。</div>';
+                }
+                return;
+            }
+
+            // 按分类过滤
+            let filtered = articlesData.filter(article => {
+                if (currentCategory === 'all') return true;
+                return article.category === currentCategory;
+            });
+
+            // 置顶优先 (top: true 的排在前面)
+            filtered.sort((a, b) => (b.top === true ? 1 : 0) - (a.top === true ? 1 : 0));
+
+            if (filtered.length === 0) {
+                blogListContainer.innerHTML = '<div class="loading-placeholder"><i class="fas fa-search"></i> 该分类下暂无文章。</div>';
+                return;
+            }
+
+            let html = '';
+            filtered.forEach(article => {
+                const topBadge = article.top ? '<div class="top-badge"><i class="fas fa-thumbtack"></i> 置顶</div>' : '';
+                const excerptText = article.excerpt || '点击阅读全文…';
+                // 卡片使用 data-url 属性，事件委托处理跳转 (也可直接内联onclick，但为了一致使用委托)
+                html += `
+                    <div class="blog-card" data-url="${escapeHtml(article.url)}">
+                        ${topBadge}
+                        <div class="card-title">${escapeHtml(article.title)}</div>
+                        <div class="card-meta">
+                            <span><i class="far fa-user"></i> ${escapeHtml(article.author)}</span>
+                            <span><i class="far fa-calendar-alt"></i> ${escapeHtml(article.date)}</span>
+                            <span><i class="far fa-folder"></i> ${escapeHtml(article.category)}</span>
+                        </div>
+                        <div class="excerpt">${escapeHtml(excerptText)}</div>
+                    </div>
+                `;
+            });
+
+            blogListContainer.innerHTML = html;
+
+            // 为所有卡片绑定点击跳转 (事件委托)
+            Array.from(document.querySelectorAll('.blog-card')).forEach(card => {
+                card.addEventListener('click', (e) => {
+                    // 防止点到内部链接 (这里没有)
+                    const url = card.getAttribute('data-url');
+                    if (url) window.location.href = url;
+                });
+            });
+        }
+
+        // ---------- 加载文章 JSON 数据 ----------
+        async function loadArticles() {
+            isLoading = true;
+            blogListContainer.innerHTML = '<div class="loading-placeholder"><i class="fas fa-spinner fa-pulse"></i> 正在加载文章列表...</div>';
+            
+            try {
+                const response = await fetch(ARTICLES_JSON_URL);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                const data = await response.json();
+                // 期望 data 是一个数组，包含文章对象
+                if (Array.isArray(data)) {
+                    articlesData = data;
+                } else {
+                    console.warn('articles.json 格式错误: 应该是一个数组');
+                    articlesData = [];
+                }
+            } catch (error) {
+                console.error('加载文章列表失败:', error);
+                // 显示错误信息，并回退到示例数据（可选），但最好提示用户
+                blogListContainer.innerHTML = `<div class="loading-placeholder" style="color:#b91c1c;">
+                    <i class="fas fa-exclamation-triangle"></i> 文章列表加载失败。<br>
+                    <small>请确认根目录下存在 articles.json 文件，格式正确。</small>
+                </div>`;
+                articlesData = [];  // 保证不崩溃
+            } finally {
+                isLoading = false;
+                // 渲染文章 (即使是空数组也会显示占位)
+                renderBlogList();
+            }
+        }
+
+        // ---------- 设置导航激活状态 ----------
         function setActiveNav(category) {
-            document.querySelectorAll('.nav-item').forEach(item => {
-                if (item.getAttribute('data-category') === category) {
+            navItems.forEach(item => {
+                const cat = item.getAttribute('data-category');
+                if (cat === category) {
                     item.classList.add('active');
                 } else {
                     item.classList.remove('active');
@@ -645,45 +664,53 @@
             });
         }
 
-        // 打字机效果
+        // ---------- 导航点击事件 ----------
+        function initNavigation() {
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const category = item.getAttribute('data-category');
+                    if (!category) return;
+                    if (category === currentCategory) return;
+                    
+                    currentCategory = category;
+                    setActiveNav(category);
+                    renderBlogList();   // 重新渲染
+                });
+            });
+        }
+
+        // ---------- 打字机效果 ----------
         function typeWriterEffect() {
-            const titleElement = document.getElementById('typingTitle');
+            if (!typingTitleEl) return;
             const fullText = "中政集团 · 中政科技";
             let i = 0;
-            titleElement.textContent = '';
+            typingTitleEl.textContent = '';
             function type() {
                 if (i < fullText.length) {
-                    titleElement.textContent += fullText.charAt(i);
+                    typingTitleEl.textContent += fullText.charAt(i);
                     i++;
                     setTimeout(type, 100);
                 } else {
-                    titleElement.style.borderRightColor = 'transparent';
+                    typingTitleEl.style.borderRightColor = 'transparent';
                 }
             }
             type();
         }
 
-        // 导航栏点击事件初始化
-        function initNavigation() {
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    const category = item.getAttribute('data-category');
-                    if (category === currentCategory) return;
-                    currentCategory = category;
-                    setActiveNav(category);
-                    buildBlogList();    // 刷新文章列表
-                });
-            });
+        // ---------- 初始化页面 ----------
+        async function init() {
+            renderResources();               // 外部链接区域
+            initNavigation();                // 分类导航事件
+            setActiveNav(currentCategory);   // 高亮“全部文章”
+            typeWriterEffect();             // 标题打字
+
+            // 加载文章数据 (异步)，加载完成后自动渲染
+            await loadArticles();
         }
 
-        // 页面加载完成后执行
-        window.addEventListener('load', () => {
-            buildResourcesGrid();
-            buildBlogList();
-            initNavigation();
-            typeWriterEffect();
-        });
-    </script>
+        // 启动一切
+        init();
+    })();
+</script>
 </body>
 </html>
