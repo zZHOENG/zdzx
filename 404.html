@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面跳转中 · 中政集团</title>
+    <script>
+        (function() {
+            // 获取用户请求的原始路径，例如 '/article/1' 或 '/article/2.html'
+            var requestedPath = window.location.pathname;
+
+            // 定义真正承载文章详情的页面
+            var articlePage = '/article.html';
+
+            // 构建重定向 URL：将原始路径作为 redirect 参数传递
+            var redirectUrl = articlePage + '?redirect=' + encodeURIComponent(requestedPath);
+
+            // 执行重定向（替换历史记录，避免404页面残留）
+            window.location.replace(redirectUrl);
+        })();
+    </script>
+    <style>
+        body {
+            background: #f4f7fc;
+            font-family: system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #2c3e66;
+        }
+        .message {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.6);
+            border-radius: 48px;
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h2>🔄 正在为您跳转到文章页面…</h2>
+        <p>如果页面没有自动跳转，请<a href="/">点击这里返回首页</a>。</p>
+    </div>
+</body>
+</html>
