@@ -49,10 +49,13 @@ $One\ day,I\ was\ in\ the\ classroom,$ 尝试 $ing$ 使用希沃浏览器打开�
 
 $Therefore,$ 我进行了一些尝试：
 
-- $www.dingding.com$
-- $www.dingding.cn$
-- $www.dingding.com.cn$
-- $www.dingding.net$
+> $www.dingding.com$ $ ^{[1,1]}$
+> 
+> $www.dingding.cn$ $ ^{[1,1]}$
+> 
+> $www.dingding.com.cn$ $ ^{[1,1]}$
+> 
+> $www.dingding.net$ $ ^{[1,1]}$
 
 ~~并无收获。~~ $\text{Pain But No Gain.}$
 
@@ -60,9 +63,9 @@ $Therefore,$ 我进行了一些尝试：
 
 $\huge\text{Awak}$，钉钉是阿里的产品。
 
-$Then,$ 我尝试了[阿里云](https://www.aliyun.com/)的官网：
+$Then,$ 我尝试了[阿里云](https://www.aliyun.com/)的官网（事实上，当时也不知道官网是什么，就尝试了一下）$ ^{[1,1]}$：
 
-- $https://www.aliyun.com/$
+> $https://www.aliyun.com/$ $ ^{[1,1]}$
 
 $It\ turned\ out:$
 
@@ -90,13 +93,13 @@ https://mirrors.aliyun.com/pypi/simple/
 
 对于 Python pip 的使用，我们可以设置全局镜像源（在命令提示符中运行以下指令）：
 
-```text
+```cmd
 pip config set global.index-url [镜像源]
 ```
 
 或者单次安装使用镜像源：
 
-```text
+```cmd
 pip install -i [镜像源] [库名]
 ```
 
@@ -105,3 +108,4 @@ pip install -i [镜像源] [库名]
 ## UPDATE
 
 - 2026.04.18 第一版（$author:\text{ZZA000HAH}$，$‌version:1.0.0$，说明：本次时间仓促，后续会对本文进行完善）。
+- 2026.04.26 第一版第一次更新（$author:\text{ZZA000HAH}$，$‌version:1.0.1$），更新见 $[v,k],v=1,k=1$。
