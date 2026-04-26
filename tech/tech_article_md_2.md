@@ -49,13 +49,13 @@ $One\ day,I\ was\ in\ the\ classroom,$ 尝试 $ing$ 使用希沃浏览器打开�
 
 $Therefore,$ 我进行了一些尝试：
 
-> - $\text{www.dingding.com}$ $ ^{[1,1]}$
+> - `www.dingding.com`$ ^{[1,1]}$
 > 
-> - $\text{www.dingding.cn}$ $ ^{[1,1]}$
+> - `www.dingding.cn`$ ^{[1,1]}$
 > 
-> - $\text{www.dingding.com.cn}$ $ ^{[1,1]}$
+> - `www.dingding.com.cn`$ ^{[1,1]}$
 > 
-> - $\text{www.dingding.net}$ $ ^{[1,1]}$
+> - `www.dingding.net`$ ^{[1,1]}$
 
 ~~并无收获。~~ $\text{Pain But No Gain.}$
 
@@ -65,7 +65,7 @@ $\huge\text{Awak}$，钉钉是阿里的产品。
 
 $Then,$ 我尝试了[阿里云](https://www.aliyun.com/)的官网（事实上，当时也不知道官网是什么，就尝试了一下）$ ^{[1,1]}$：
 
-> - $\text{https://www.aliyun.com/}$ $ ^{[1,1]}$
+> - `https://www.aliyun.com/`$ ^{[1,1]}$
 
 $It\ turned\ out:$
 
