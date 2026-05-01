@@ -112,13 +112,11 @@
             border-bottom: 2px solid #e9eef4;
             padding-bottom: 1.2rem;
         }
+        /* ---------- 修改：文章标题纯色显示（移除渐变） ---------- */
         .detail-title {
             font-size: 2.2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #1f2e4a, #4a3f73);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #1f2e4a;            /* 直接使用深蓝色，不再渐变 */
             margin-bottom: 0.8rem;
         }
         .detail-meta {
@@ -204,12 +202,13 @@
             .detail-title { font-size: 1.6rem; }
         }
 
+        /* 暗色模式适配 */
         @media (prefers-color-scheme: dark) {
             body { background: #121826; color: #e2e8f0; }
             .article-detail { background: #1e293b; border-color: #2d3748; }
+            /* 暗色模式标题：纯浅色，无渐变 */
             .detail-title {
-                background: linear-gradient(135deg, #cbd5e6, #a5b4fc);
-                -webkit-text-fill-color: transparent;
+                color: #f1f5f9;
             }
             .detail-meta, .detail-content { color: #cbd5e1; }
             .detail-content blockquote {
@@ -365,7 +364,7 @@
                     const rawHtml = marked.parse(markdownText, { async: false });
                     contentDiv.innerHTML = rawHtml;
 
-                    // 6. 触发 MathJax 渲染（如果有公式）
+                    // 6. 触发 MathJax 渲染
                     if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
                         await MathJax.typesetPromise([contentDiv]);
                     }
