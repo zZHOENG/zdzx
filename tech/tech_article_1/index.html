@@ -30,13 +30,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <style>
-        /* ===== 全局重置与基础样式 ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(145deg, #f4f7fc 0%, #eef2f7 100%);
@@ -46,15 +40,12 @@
             display: flex;
             flex-direction: column;
         }
-
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
             flex: 1;
         }
-
-        /* ===== 头部样式（与主页一致） ===== */
         .header {
             display: flex;
             flex-wrap: wrap;
@@ -64,24 +55,9 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid rgba(100, 116, 139, 0.2);
         }
-
-        .logo-area {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .about-image img {
-            border-radius: 12px;
-            max-width: 300px;
-            height: auto;
-        }
-
-        .title-zone {
-            text-align: right;
-        }
-
+        .logo-area { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+        .about-image img { border-radius: 12px; max-width: 300px; height: auto; }
+        .title-zone { text-align: right; }
         .typing-title {
             font-size: 2.0rem;
             font-weight: 600;
@@ -96,19 +72,11 @@
             display: inline-block;
             animation: blinkCursor 0.75s step-end infinite;
         }
-
         @keyframes blinkCursor {
             0%, 100% { border-color: #8b7bb5; }
             50% { border-color: transparent; }
         }
-
-        .sub {
-            font-size: 0.8rem;
-            color: #6f7d95;
-            margin-top: 8px;
-        }
-
-        /* ===== 返回按钮 ===== */
+        .sub { font-size: 0.8rem; color: #6f7d95; margin-top: 8px; }
         .btn-back {
             display: inline-flex;
             align-items: center;
@@ -126,14 +94,11 @@
             transition: 0.2s;
             text-decoration: none;
         }
-
         .btn-back:hover {
             background: #fff;
             border-color: #8fa1c2;
             color: #253c60;
         }
-
-        /* ===== 文章卡片 ===== */
         .article-detail {
             background: #ffffffdd;
             backdrop-filter: blur(4px);
@@ -142,14 +107,11 @@
             box-shadow: 0 10px 25px -12px rgba(0,0,0,0.1);
             border: 1px solid rgba(165, 185, 215, 0.5);
         }
-
-        /* ===== 文章头部 ===== */
         .detail-header {
             margin-bottom: 1.5rem;
             border-bottom: 2px solid #e9eef4;
             padding-bottom: 1.2rem;
         }
-
         .detail-title {
             font-size: 2.2rem;
             font-weight: 700;
@@ -159,32 +121,22 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.8rem;
         }
-
         .detail-meta {
             display: flex;
             gap: 1.8rem;
             font-size: 0.9rem;
             color: #6f7e9b;
         }
-
-        /* ===== 文章正文样式 ===== */
         .detail-content {
             font-size: 1rem;
             color: #1f2a44;
             line-height: 1.65;
         }
-
-        .detail-content h1,
-        .detail-content h2,
-        .detail-content h3 {
+        .detail-content h1, .detail-content h2, .detail-content h3 {
             margin: 1.5rem 0 0.8rem;
             font-weight: 600;
         }
-
-        .detail-content p {
-            margin: 1rem 0;
-        }
-
+        .detail-content p { margin: 1rem 0; }
         .detail-content blockquote {
             border-left: 4px solid #a9c0e6;
             background: #f5f9ff;
@@ -192,40 +144,26 @@
             border-radius: 20px;
             margin: 1rem 0;
         }
-
-        .detail-content ul,
-        .detail-content ol {
-            padding-left: 1.8rem;
-            margin: 0.8rem 0;
-        }
-
-        .detail-content li {
-            margin: 0.3rem 0;
-            line-height: 1.6;
-        }
-
+        .detail-content ul, .detail-content ol { padding-left: 1.8rem; margin: 0.8rem 0; }
+        .detail-content li { margin: 0.3rem 0; line-height: 1.6; }
         .detail-content img {
             max-width: 100%;
             border-radius: 24px;
             margin: 1rem 0;
             box-shadow: 0 5px 12px rgba(0,0,0,0.05);
         }
-
         .detail-content pre {
             background: #eef2fa;
             padding: 1rem;
             border-radius: 20px;
             overflow-x: auto;
         }
-
         .detail-content code {
             background: #eef2fa;
             padding: 0.2rem 0.4rem;
             border-radius: 12px;
             font-size: 0.9em;
         }
-
-        /* ===== 提示信息框 ===== */
         .info-box {
             background: #eef3ff;
             border-radius: 24px;
@@ -233,8 +171,6 @@
             margin: 1.2rem 0;
             border-left: 6px solid #7c93c7;
         }
-
-        /* ===== 图片卡片 ===== */
         .image-card {
             background: #f8faff;
             border-radius: 28px;
@@ -243,26 +179,9 @@
             margin: 1.4rem 0;
             border: 1px solid #dce5f2;
         }
-
-        .image-card img {
-            border-radius: 20px;
-            margin: 0;
-        }
-
-        /* ===== 错误提示 ===== */
-        .error-message {
-            color: #b91c1c;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 3rem;
-            color: #6f7d95;
-        }
-
-        /* ===== 页脚 ===== */
+        .image-card img { border-radius: 20px; margin: 0; }
+        .error-message { color: #b91c1c; padding: 2rem; text-align: center; }
+        .loading { text-align: center; padding: 3rem; color: #6f7d95; }
         footer {
             text-align: center;
             margin-top: 3rem;
@@ -272,100 +191,45 @@
             padding-top: 2rem;
         }
 
-        /* ===== 响应式调整 ===== */
         @media (max-width: 700px) {
-            .container {
-                padding: 1rem;
-            }
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-            .title-zone {
-                text-align: left;
-                width: 100%;
-            }
+            .container { padding: 1rem; }
+            .header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .title-zone { text-align: left; width: 100%; }
             .typing-title {
                 font-size: 1.4rem;
                 white-space: normal;
                 border-right: none;
                 animation: none;
             }
-            .detail-title {
-                font-size: 1.6rem;
-            }
+            .detail-title { font-size: 1.6rem; }
         }
 
-        /* ===== 暗色模式适配 ===== */
         @media (prefers-color-scheme: dark) {
-            body {
-                background: #121826;
-                color: #e2e8f0;
-            }
-
-            .article-detail {
-                background: #1e293b;
-                border-color: #2d3748;
-            }
-
+            body { background: #121826; color: #e2e8f0; }
+            .article-detail { background: #1e293b; border-color: #2d3748; }
             .detail-title {
-                color: #cbd5e6;
                 background: linear-gradient(135deg, #cbd5e6, #a5b4fc);
                 -webkit-text-fill-color: transparent;
             }
-
-            .detail-meta,
-            .detail-content {
-                color: #cbd5e1;
-            }
-
+            .detail-meta, .detail-content { color: #cbd5e1; }
             .detail-content blockquote {
                 background: #0f172a;
                 border-left-color: #6b7280;
                 color: #e2e8f0;
             }
-
-            .detail-content pre,
-            .detail-content code {
-                background: #0f172a;
-                color: #e2e8f0;
-            }
-
-            .info-box {
-                background: #0f172a;
-                border-left-color: #818cf8;
-            }
-
-            .image-card {
-                background: #0f172a;
-                border-color: #334155;
-            }
-
-            .btn-back {
-                background: #1e293b;
-                border-color: #475569;
-                color: #cbd5e6;
-            }
-
-            .btn-back:hover {
-                background: #2d3a5e;
-                border-color: #818cf8;
-                color: white;
-            }
-
-            .header {
-                border-bottom-color: rgba(100, 116, 139, 0.3);
-            }
-            .sub {
-                color: #9ca3af;
-            }
+            .detail-content pre, .detail-content code { background: #0f172a; color: #e2e8f0; }
+            .info-box { background: #0f172a; border-left-color: #818cf8; }
+            .image-card { background: #0f172a; border-color: #334155; }
+            .btn-back { background: #1e293b; border-color: #475569; color: #cbd5e6; }
+            .btn-back:hover { background: #2d3a5e; border-color: #818cf8; color: white; }
+            .header { border-bottom-color: rgba(100, 116, 139, 0.3); }
+            .sub { color: #9ca3af; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 头部区域（与主页一致） -->
+        <!-- 头部（与主页一致） -->
         <div class="header">
             <div class="logo-area">
                 <div class="about-image">
@@ -378,12 +242,12 @@
             </div>
         </div>
 
-        <!-- 返回首页链接 -->
+        <!-- 返回首页 -->
         <a class="btn-back" href="../../">
             <i class="fas fa-arrow-left"></i> 返回首页
         </a>
 
-        <!-- 文章详情容器 -->
+        <!-- 文章内容区域 -->
         <div id="articleDetailContent" class="article-detail">
             <div class="loading"><i class="fas fa-spinner fa-pulse"></i> 正在加载文章元数据…</div>
         </div>
@@ -398,7 +262,11 @@
         (function() {
             "use strict";
 
-            // 简单的 HTML 转义
+            // ---------- 配置 ----------
+            const ARTICLES_JSON_PATH = '../../articles.json';  // 相对于当前文章目录的路径
+            const MARKDOWN_FILE = './article.md';              // 正文文件（同目录下）
+
+            // 工具函数：转义 HTML
             function escapeHtml(str) {
                 const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;' };
                 return String(str).replace(/[&<>]/g, c => map[c]);
@@ -423,38 +291,52 @@
                 type();
             }
 
-            // 加载 meta.json
-            async function loadArticleMeta() {
-                try {
-                    const response = await fetch('./meta.json');
-                    if (!response.ok) throw new Error(`无法加载 meta.json (HTTP ${response.status})`);
-                    return await response.json();
-                } catch (error) {
-                    console.error('加载元数据失败:', error);
-                    throw error;
-                }
+            // 加载本地 meta.json 获取 id
+            async function loadLocalMeta() {
+                const res = await fetch('./meta.json');
+                if (!res.ok) throw new Error(`无法加载 meta.json (HTTP ${res.status})`);
+                return await res.json();
             }
 
-            // 渲染文章内容
+            // 加载全局 articles.json
+            async function loadGlobalArticles() {
+                const res = await fetch(ARTICLES_JSON_PATH);
+                if (!res.ok) throw new Error(`无法加载全局文章列表 (HTTP ${res.status})`);
+                return await res.json();
+            }
+
+            // 根据 id 从数组中查找文章数据
+            function findArticleById(articles, id) {
+                return articles.find(art => String(art.id) === String(id));
+            }
+
+            // 主渲染函数
             async function renderArticle() {
                 const container = document.getElementById('articleDetailContent');
                 if (!container) return;
 
                 try {
-                    // 1. 加载元数据
-                    const meta = await loadArticleMeta();
-                    
-                    // 更新页面标题
-                    document.title = `${meta.title} | 中政集团`;
+                    // 1. 加载 meta.json 获取 id
+                    const localMeta = await loadLocalMeta();
+                    const articleId = localMeta.id;
+                    if (!articleId) throw new Error('meta.json 中未指定 id');
 
-                    // 2. 渲染文章头部
+                    // 2. 加载全局文章列表
+                    const articles = await loadGlobalArticles();
+                    const article = findArticleById(articles, articleId);
+                    if (!article) throw new Error(`在 articles.json 中未找到 id 为 ${articleId} 的文章`);
+
+                    // 更新页面标题
+                    document.title = `${article.title} | 中政集团`;
+
+                    // 3. 渲染文章头部信息
                     const headerHtml = `
                         <div class="detail-header">
-                            <div class="detail-title">${escapeHtml(meta.title)}</div>
+                            <div class="detail-title">${escapeHtml(article.title)}</div>
                             <div class="detail-meta">
-                                <span><i class="far fa-user"></i> ${escapeHtml(meta.author)}</span>
-                                <span><i class="far fa-calendar-alt"></i> ${escapeHtml(meta.date)}</span>
-                                <span><i class="far fa-folder"></i> ${escapeHtml(meta.category)}</span>
+                                <span><i class="far fa-user"></i> ${escapeHtml(article.author)}</span>
+                                <span><i class="far fa-calendar-alt"></i> ${escapeHtml(article.date)}</span>
+                                <span><i class="far fa-folder"></i> ${escapeHtml(article.category)}</span>
                             </div>
                         </div>
                         <div class="detail-content" id="detailMarkdownBody">
@@ -464,33 +346,26 @@
                     container.innerHTML = headerHtml;
                     const contentDiv = document.getElementById('detailMarkdownBody');
 
-                    // 3. 确定 Markdown 文件路径（优先使用 meta.markdown，否则默认 ./article.md）
-                    let markdownPath = meta.markdown;
-                    if (!markdownPath) {
-                        markdownPath = './article.md';
-                        console.warn('meta.json 未指定 markdown 字段，使用默认路径: ./article.md');
-                    }
-
-                    // 4. 加载 Markdown 正文
+                    // 4. 加载同目录下的 Markdown 文件
                     let markdownText;
                     try {
-                        const mdResponse = await fetch(markdownPath);
-                        if (!mdResponse.ok) throw new Error(`HTTP ${mdResponse.status}`);
-                        markdownText = await mdResponse.text();
+                        const mdRes = await fetch(MARKDOWN_FILE);
+                        if (!mdRes.ok) throw new Error(`HTTP ${mdRes.status}`);
+                        markdownText = await mdRes.text();
                     } catch (mdError) {
                         console.error('Markdown 加载失败:', mdError);
                         contentDiv.innerHTML = `<div class="error-message">
                             <i class="fas fa-exclamation-triangle"></i> 文章内容加载失败：${escapeHtml(mdError.message)}<br>
-                            <small>路径：${escapeHtml(markdownPath)}</small>
+                            <small>请确认当前目录下存在 article.md 文件</small>
                         </div>`;
                         return;
                     }
 
-                    // 5. 渲染 Markdown
+                    // 5. 渲染 Markdown 为 HTML
                     const rawHtml = marked.parse(markdownText, { async: false });
                     contentDiv.innerHTML = rawHtml;
 
-                    // 6. 触发 MathJax 渲染
+                    // 6. 触发 MathJax 渲染（如果有公式）
                     if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
                         await MathJax.typesetPromise([contentDiv]);
                     }
@@ -498,8 +373,7 @@
                 } catch (error) {
                     console.error('文章渲染失败:', error);
                     container.innerHTML = `<div class="error-message">
-                        <i class="fas fa-exclamation-circle"></i> 加载失败：${escapeHtml(error.message)}<br>
-                        <small>请确保当前目录下存在 meta.json 文件</small>
+                        <i class="fas fa-exclamation-circle"></i> 加载失败：${escapeHtml(error.message)}
                     </div>`;
                 }
             }
