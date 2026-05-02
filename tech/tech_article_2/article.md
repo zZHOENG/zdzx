@@ -6,6 +6,8 @@
 
 设想一下：当你身处正中教室，你面前是正中教室的希沃大屏，你试图运行一个 Python 程序，但是解释器显示：$\text{ModuleNotFoundError: No module named 'xxx'}$。
 
+当然，其中，需要说明，也不太需要说明的是，正中教室计算机使用的操作系统为 $\text{Windows 操作系统}$，通常为 $\text{Windows 10}$。$ ^{[1,2]}$
+
 ---
 
 ## 前言
@@ -49,13 +51,13 @@ $One\ day,I\ was\ in\ the\ classroom,$ 尝试 $ing$ 使用希沃浏览器打开�
 
 $Therefore,$ 我进行了一些尝试：
 
-> - `www.dingding.com`$ ^{[1,1]}$
+> `www.dingding.com`$ ^{[1,1],[1,2]}$
 > 
-> - `www.dingding.cn`$ ^{[1,1]}$
+> `www.dingding.cn`$ ^{[1,1],[1,2]}$
 > 
-> - `www.dingding.com.cn`$ ^{[1,1]}$
+> `www.dingding.com.cn`$ ^{[1,1],[1,2]}$
 > 
-> - `www.dingding.net`$ ^{[1,1]}$
+> `www.dingding.net`$ ^{[1,1],[1,2]}$
 
 ~~并无收获。~~ $\text{Pain But No Gain.}$
 
@@ -65,7 +67,7 @@ $\huge\text{Awak}$，钉钉是阿里的产品。
 
 $Then,$ 我尝试了[阿里云](https://www.aliyun.com/)的官网（事实上，当时也不知道官网是什么，就尝试了一下）$ ^{[1,1]}$：
 
-> - `https://www.aliyun.com/`$ ^{[1,1]}$
+`https://www.aliyun.com/`$ ^{[1,1],[1,2]}$
 
 $It\ turned\ out:$
 
@@ -97,15 +99,49 @@ https://mirrors.aliyun.com/pypi/simple/
 pip config set global.index-url [镜像源]
 ```
 
+设置为阿里云镜像源即为：$ ^{[1,2]}$
+
+```cmd
+pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+```
+
 或者单次安装使用镜像源：
 
 ```cmd
 pip install -i [镜像源] [库名]
 ```
 
-~~其中，本文阅读对象并不应该是从零开始者。~~
+使用阿里云镜像源进行安装即为：$ ^{[1,2]}$
+
+```cmd
+pip install -i https://mirrors.aliyun.com/pypi/simple/ [库名]
+```
+
+如安装 `pygame` 库即为：$ ^{[1,2]}$
+
+```cmd
+pip install -i https://mirrors.aliyun.com/pypi/simple/ pygame
+```
+
+### 常见问题：$ ^{[1,2]}$
+
+- 你应确保所操作的计算机上已有 Python 环境且正常。$ ^{[1,2]}$
+- 你应确保所操作的计算机上已有 Python 的 pip 环境。$ ^{[1,2]}$
+
+> 如果 $\dots$，那么你可以上网搜索以下词条：$ ^{[1,2]}$
+>
+> - 操作系统（或：Windows 操作系统）$ ^{[1,2]}$
+> - Python$ ^{[1,2]}$
+> - pip（或：Python pip）$ ^{[1,2]}$
+> - Python 第三方库$ ^{[1,2]}$
+> - 阿里云$ ^{[1,2]}$
+> - 镜像源（或：Python 镜像源）$ ^{[1,2]}$
+> - 命令提示符（或：cmd）$ ^{[1,2]}$
+
+> 如果 pip 无法正常使用，请参见上述建议参考文章。$ ^{[1,2]}$
 
 ## UPDATE
 
 - 2026.04.18 第一版（$author:\text{ZZA000HAH}$，$‌version:1.0.0$，说明：本次时间仓促，后续会对本文进行完善）。
 - 2026.04.26 第一版第一次更新（$author:\text{ZZA000HAH}$，$‌version:1.0.1$），更新见 $[v,k],v=1,k=1$。
+- 2026.05.01/02 第一版第二次更新（$author:\text{ZZA000HAH}$，$‌version:1.0.2$），更新见 $[v,k],v=1,k=2$。
