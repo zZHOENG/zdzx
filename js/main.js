@@ -4,12 +4,12 @@
     // ---------- 配置文件路径 ----------
     const CATEGORIES_JSON_URL = './categories.json';
     const RESOURCES_JSON_URL  = './resources.json';
-    const ARTICLES_JSON_URL   = './articles.json';   // 文章数据（已存在）
+    const ARTICLES_JSON_URL   = './articles.json';
 
     // ---------- 全局状态 ----------
     let articlesData   = [];
-    let categoriesData = [];     // [{ id, label, icon }]
-    let resourcesData  = [];     // [{ title, description, url, icon }]
+    let categoriesData = [];
+    let resourcesData  = [];
     let currentCategory = 'all';
 
     // ---------- DOM 元素 ----------
@@ -24,11 +24,11 @@
         return String(str).replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' })[m]);
     }
 
-    // ---------- 渲染侧边栏（基于 categories.json） ----------
+    // ---------- 渲染侧边栏（完全替换 DOM） ----------
     function renderSidebar() {
         if (!sidebarEl) return;
         let html = '';
-        // 强制首个“全部文章”项
+        // 第一个 item：全部文章
         html += `<div class="nav-item active" data-category="all">
                     <i class="fas fa-newspaper"></i>
                     <span>全部文章</span>
@@ -56,7 +56,7 @@
         });
     }
 
-    // ---------- 渲染外部资源卡片（基于 resources.json） ----------
+    // ---------- 渲染外部资源卡片（完全替换） ----------
     function renderResources() {
         if (!resourcesGrid) return;
         resourcesGrid.innerHTML = '';
@@ -77,7 +77,7 @@
         });
     }
 
-    // ---------- 渲染文章列表（基于 articlesData） ----------
+    // ---------- 渲染文章列表 ----------
     function renderBlogList() {
         if (!blogListContainer) return;
         if (!articlesData || articlesData.length === 0) {
@@ -85,13 +85,11 @@
             return;
         }
 
-        // 按分类过滤
         let filtered = articlesData.filter(article => {
             if (currentCategory === 'all') return true;
             return article.category === currentCategory;
         });
 
-        // 置顶优先
         filtered.sort((a, b) => (b.top === true ? 1 : 0) - (a.top === true ? 1 : 0));
 
         if (filtered.length === 0) {
@@ -120,7 +118,6 @@
         });
         blogListContainer.innerHTML = html;
 
-        // 点击卡片跳转
         document.querySelectorAll('.blog-card').forEach(card => {
             card.addEventListener('click', () => {
                 const url = card.getAttribute('data-url');
@@ -129,39 +126,37 @@
         });
     }
 
-    // ---------- 加载 JSON 数据（通用） ----------
+    // ---------- 加载 JSON ----------
     async function loadJSON(url) {
         const resp = await fetch(url);
         if (!resp.ok) throw new Error(`HTTP ${resp.status} (${url})`);
         return resp.json();
     }
 
-    // ---------- 加载所有配置文件 ----------
+    // ---------- 初始化所有数据并替换 DOM ----------
     async function loadAllData() {
-        blogListContainer.innerHTML = '<div class="loading-placeholder"><i class="fas fa-spinner fa-pulse"></i> 正在加载数据...</div>';
+        // 保持文章列表加载中占位符
+        blogListContainer.innerHTML = '<div class="loading-placeholder"><i class="fas fa-spinner fa-pulse"></i> 正在加载文章列表...</div>';
         try {
-            // 并行加载三个配置文件
             const [categories, resources, articles] = await Promise.all([
                 loadJSON(CATEGORIES_JSON_URL).catch(() => []),
                 loadJSON(RESOURCES_JSON_URL).catch(() => []),
                 loadJSON(ARTICLES_JSON_URL).catch(() => [])
             ]);
             categoriesData = Array.isArray(categories) ? categories : [];
-            resourcesData  = Array.isArray(resources) ? resources : [];
-            articlesData   = Array.isArray(articles) ? articles : [];
+            resourcesData  = Array.isArray(resources)  ? resources  : [];
+            articlesData   = Array.isArray(articles)   ? articles   : [];
 
-            // 渲染各个区域
+            // 用新数据替换静态占位内容
             renderSidebar();
             renderResources();
             renderBlogList();
         } catch (e) {
-            console.error('初始化加载失败:', e);
+            console.error('数据加载失败:', e);
             blogListContainer.innerHTML = `<div class="loading-placeholder" style="color:#b91c1c;">
                 <i class="fas fa-exclamation-triangle"></i> 数据加载失败，请刷新重试。
             </div>`;
-            // 仍然尝试渲染可能已经部分加载的数据
-            renderSidebar();
-            renderResources();
+            // 即使加载失败，侧边栏和资源区域仍保留 HTML 静态占位，无需额外处理
         }
     }
 
@@ -183,13 +178,12 @@
         type();
     }
 
-    // ---------- 页面初始化 ----------
+    // ---------- 页面启动 ----------
     function init() {
         typeWriterEffect();
-        loadAllData();   // 异步加载所有配置并渲染
+        loadAllData();
     }
 
-    // 确保 DOM 就绪后执行（因为使用 defer，脚本会在 DOMContentLoaded 前执行）
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
