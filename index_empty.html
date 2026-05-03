@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>中政集团 · 河北正定中学</title>
+
+    <!-- 站点图标 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
+    <link rel="manifest" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
+
+    <!-- 字体与图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- 外部样式 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <!-- 左侧导航栏（静态占位，加载后由 main.js 动态替换） -->
+    <aside class="sidebar" id="sidebarNav">
+        <!-- 默认静态导航项，避免加载中空白 -->
+        <div class="nav-item active" data-category="all">
+            <i class="fas fa-newspaper"></i>
+            <span>全部文章</span>
+        </div>
+    </aside>
+
+    <!-- 右侧主内容区 -->
+    <main class="main-content">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="logo-area">
+                <div class="about-image">
+                    <img src="https://zdzx.zhongzheng.tech/favicon_2.png" alt="河北正定中学" width="300" height="80">
+                </div>
+            </div>
+            <div class="title-zone">
+                <div class="typing-title" id="typingTitle"></div>
+                <div class="sub">中政 ZHOENG · 河北正定中学办事处</div>
+            </div>
+        </div>
+
+        <!-- 外部资源链接区域（静态占位，加载后动态替换） -->
+        <div class="resources-section">
+            <div class="resources-header">
+                <i class="fas fa-link"></i> 中政集团 & 河北正定中学
+                <span class="resources-tip">中政集团 · 中政科技</span>
+            </div>
+            <div class="resources-grid" id="resourcesGrid">
+                <!-- 默认资源卡片，保证加载时有内容 -->
+                <a class="resource-card" href="https://zdzx.zhongzheng.tech/" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-icon"><i class="fas fa-cloud"></i></div>
+                    <div class="resource-info">
+                        <div class="resource-title">网站链接框</div>
+                        <div class="resource-desc">zdzx 网站链接框 · 加载中</div>
+                    </div>
+                </a>
+                <a class="resource-card" href="https://zdzx.zhongzheng.tech/" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-icon"><i class="fas fa-cloud"></i></div>
+                    <div class="resource-info">
+                        <div class="resource-title">网站链接框</div>
+                        <div class="resource-desc">zdzx 网站链接框 · 加载中</div>
+                    </div>
+                </a>
+                <a class="resource-card" href="https://zdzx.zhongzheng.tech/" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-icon"><i class="fas fa-cloud"></i></div>
+                    <div class="resource-info">
+                        <div class="resource-title">网站链接框</div>
+                        <div class="resource-desc">zdzx 网站链接框 · 加载中</div>
+                    </div>
+                </a>
+                <a class="resource-card" href="https://zdzx.zhongzheng.tech/" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-icon"><i class="fas fa-cloud"></i></div>
+                    <div class="resource-info">
+                        <div class="resource-title">网站链接框</div>
+                        <div class="resource-desc">zdzx 网站链接框 · 加载中</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 文章列表容器 -->
+        <div id="blogListView">
+            <div class="blog-list" id="blogListContainer">
+                <div class="loading-placeholder">
+                    <i class="fas fa-spinner fa-pulse"></i> 正在加载文章列表...
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer>
+    中政集团 · 中政科技 <span>&copy;</span> 2025-2026<br>
+    中政 ZHOENG · 河北正定中学办事处 <span>&copy;</span> 2026-2026
+</footer>
+
+<!-- 外部脚本 -->
+<script src="js/main.js" defer></script>
+</body>
+</html>
