@@ -1,0 +1,11 @@
+[
+    { "id": "公告 · 通知",    "label": "公告 · 通知",    "icon": "fas fa-file-alt" },
+    { "id": "科学 · 理论",    "label": "科学 · 理论",    "icon": "fas fa-database" },
+    { "id": "科技 · 工程",    "label": "科技 · 工程",    "icon": "fas fa-microchip" },
+    { "id": "记录 · 文章",    "label": "记录 · 文章",    "icon": "fas fa-layer-group" },
+    { "id": "中政官方",       "label": "中政官方",       "icon": "fas fa-building" },
+    { "id": "正中官方",       "label": "正中官方",       "icon": "fas fa-landmark" },
+    { "id": "NOI Plus",       "label": "NOI Plus",       "icon": "fas fa-code" },
+    { "id": "公益宣传",       "label": "公益宣传",       "icon": "fas fa-child" },
+    { "id": "广告宣传",       "label": "广告宣传",       "icon": "fas fa-rectangle-ad" }
+]
