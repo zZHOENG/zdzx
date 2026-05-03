@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>中政集团 · 河北正定中学</title>
+
+    <!-- 站点图标 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
+    <link rel="manifest" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
+
+    <!-- 字体与图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- 外部样式 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <!-- 左侧导航栏（静态占位，加载后由 main.js 动态替换） -->
+    <aside class="sidebar" id="sidebarNav">
+        <!-- 默认静态导航项，避免加载中空白 -->
+        <div class="nav-item active" data-category="all">
+            <i class="fas fa-newspaper"></i>
+            <span>全部文章</span>
+        </div>
+        <div class="nav-item" data-category="公告 · 通知">
+            <i class="fas fa-file-alt"></i>
+            <span>公告 · 通知</span>
+        </div>
+        <div class="nav-item" data-category="科学 · 理论">
+            <i class="fas fa-database"></i>
+            <span>科学 · 理论</span>
+        </div>
+        <div class="nav-item" data-category="科技 · 工程">
+            <i class="fas fa-microchip"></i>
+            <span>科技 · 工程</span>
+        </div>
+        <div class="nav-item" data-category="记录 · 文章">
+            <i class="fas fa-layer-group"></i>
+            <span>记录 · 文章</span>
+        </div>
+        <div class="nav-item" data-category="中政官方">
+            <i class="fas fa-building"></i>
+            <span>中政官方</span>
+        </div>
+        <div class="nav-item" data-category="正中官方">
+            <i class="fas fa-landmark"></i>
+            <span>正中官方</span>
+        </div>
+        <div class="nav-item" data-category="NOI Plus">
+            <i class="fas fa-code"></i>
+            <span>NOI Plus</span>
+        </div>
+        <div class="nav-item" data-category="公益宣传">
+            <i class="fas fa-child"></i>
+            <span>公益宣传</span>
+        </div>
+        <div class="nav-item" data-category="广告宣传">
+            <i class="fas fa-rectangle-ad"></i>
+            <span>广告宣传</span>
+        </div>
+    </aside>
+
+    <!-- 右侧主内容区 -->
+    <main class="main-content">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="logo-area">
+                <div class="about-image">
+                    <img src="https://zdzx.zhongzheng.tech/favicon_2.png" alt="河北正定中学" width="300" height="80">
+                </div>
+            </div>
+            <div class="title-zone">
+                <div class="typing-title" id="typingTitle"></div>
+                <div class="sub">中政 ZHOENG · 河北正定中学办事处</div>
+            </div>
+        </div>
+
+        <!-- 外部资源链接区域（静态占位，加载后动态替换） -->
+        <div class="resources-section">
+            <div class="resources-header">
+                <i class="fas fa-link"></i> 中政集团 & 河北正定中学
+                <span class="resources-tip">中政集团 · 中政科技</span>
+            </div>
+            <div class="resources-grid" id="resourcesGrid">
+                <!-- 默认资源卡片，保证加载时有内容 -->
+                <a class="resource-card" href="https://github.com/zZHOENG/zdzx" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-icon"><i class="fab fa-github"></i></div>
+                    <div class="resource-info">
+                        <div class="resource-title">Github 开源</div>
+                        <div class="resource-desc">中政 ZHOENG · 河北正定中学办事处</div>
+                    </div>
+                </a>
+                <a class="resource-card" href="https://docs.zhongzheng.tech/docs/developer/" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-icon"><i class="fas fa-code"></i></div>
+                    <div class="resource-info">
+                        <div class="resource-title">网站开发者</div>
+                        <div class="resource-desc">zdzx.zhongzheng.tech 网站开发者</div>
+                    </div>
+                </a>
+                <a class="resource-card" href="https://docs.zhongzheng.tech/docs/feedback/" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-icon"><i class="fas fa-comments"></i></div>
+                    <div class="resource-info">
+                        <div class="resource-title">反馈及投稿</div>
+                        <div class="resource-desc">网站相关问题反馈与文章投稿</div>
+                    </div>
+                </a>
+                <a class="resource-card" href="https://docs.zhongzheng.tech/" target="_blank" rel="noopener noreferrer">
+                    <div class="resource-icon"><i class="fas fa-newspaper"></i></div>
+                    <div class="resource-info">
+                        <div class="resource-title">文档与帮助</div>
+                        <div class="resource-desc">网站用户协议 · 隐私政策 · 免责声明等</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 文章列表容器 -->
+        <div id="blogListView">
+            <div class="blog-list" id="blogListContainer">
+                <div class="loading-placeholder">
+                    <i class="fas fa-spinner fa-pulse"></i> 正在加载文章列表...
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer>
+    中政集团 · 中政科技 <span>&copy;</span> 2025-2026<br>
+    中政 ZHOENG · 河北正定中学办事处 <span>&copy;</span> 2026-2026
+</footer>
+
+<!-- 外部脚本 -->
+<script src="js/main.js" defer></script>
+</body>
+</html>
