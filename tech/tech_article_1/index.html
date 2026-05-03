@@ -30,6 +30,12 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <style>
+        /* ---------- 修复滚动条造成的宽度跳动 ---------- */
+        html {
+            overflow-y: scroll;            /* 强制显示滚动条，避免消失/出现 */
+            scrollbar-gutter: stable;      /* 现代浏览器：保留滚动条空间 */
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
@@ -106,13 +112,14 @@
             padding: 2rem 2rem 2.8rem;
             box-shadow: 0 10px 25px -12px rgba(0,0,0,0.1);
             border: 1px solid rgba(165, 185, 215, 0.5);
+            /* 保证最小高度，减少骨架屏与真实内容的高度差异 */
+            min-height: 400px;
         }
         .detail-header {
             margin-bottom: 1.5rem;
             border-bottom: 2px solid #e9eef4;
             padding-bottom: 1.2rem;
         }
-        /* ---------- 文章标题纯色显示 ---------- */
         .detail-title {
             font-size: 2.2rem;
             font-weight: 700;
@@ -189,7 +196,7 @@
             padding-top: 2rem;
         }
 
-        /* ---------- 骨架屏样式（新增） ---------- */
+        /* ---------- 骨架屏样式 ---------- */
         .skeleton-title {
             height: 2.2rem;
             width: 70%;
@@ -225,7 +232,7 @@
             100% { background-position: -200% 0; }
         }
 
-        /* 夜间模式适配 */
+        /* ---------- 夜间模式适配 ---------- */
         @media (prefers-color-scheme: dark) {
             body { background: #121826; color: #e2e8f0; }
             .article-detail { background: #1e293b; border-color: #2d3748; }
@@ -245,12 +252,14 @@
             .sub { color: #9ca3af; }
 
             /* 骨架屏暗色模式 */
-            .skeleton-title, .skeleton-meta, .skeleton-line {
+            .skeleton-title,
+            .skeleton-meta,
+            .skeleton-line {
                 background: linear-gradient(90deg, #334155 25%, #475569 50%, #334155 75%);
             }
         }
 
-        /* 响应式 */
+        /* ---------- 响应式 ---------- */
         @media (max-width: 700px) {
             .container { padding: 1rem; }
             .header { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -315,7 +324,7 @@
             "use strict";
 
             // ---------- 配置 ----------
-            const ARTICLES_JSON_PATH = '../../articles.json';  // 相对于当前文章目录的全局列表
+            const ARTICLES_JSON_PATH = '../../articles.json';  // 相对于当前文章目录的路径
             const MARKDOWN_FILE = './article.md';              // 正文文件（同目录下）
 
             // 工具函数：转义 HTML
@@ -381,7 +390,7 @@
                     // 更新页面标题
                     document.title = `${article.title} | 中政集团`;
 
-                    // 3. 用真实标题和元数据替换骨架屏（保留 content 区域以供后续填充）
+                    // 3. 替换骨架屏头部为真实数据，正文区域继续显示骨架
                     container.innerHTML = `
                         <div class="detail-header">
                             <div class="detail-title">${escapeHtml(article.title)}</div>
@@ -392,7 +401,7 @@
                             </div>
                         </div>
                         <div class="detail-content" id="detailMarkdownBody">
-                            <!-- 骨架屏占位，等待正文加载 -->
+                            <!-- 正文加载期间继续显示骨架线 -->
                             <div class="skeleton-line"></div>
                             <div class="skeleton-line short"></div>
                             <div class="skeleton-line"></div>
@@ -416,7 +425,7 @@
                         return;
                     }
 
-                    // 5. 渲染 Markdown 为 HTML，并替换骨架屏
+                    // 5. 渲染 Markdown 为 HTML
                     const rawHtml = marked.parse(markdownText, { async: false });
                     contentDiv.innerHTML = rawHtml;
 
