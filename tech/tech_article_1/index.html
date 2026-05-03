@@ -112,11 +112,11 @@
             border-bottom: 2px solid #e9eef4;
             padding-bottom: 1.2rem;
         }
-        /* ---------- 修改：文章标题纯色显示（移除渐变） ---------- */
+        /* ---------- 文章标题纯色显示 ---------- */
         .detail-title {
             font-size: 2.2rem;
             font-weight: 700;
-            color: #1f2e4a;            /* 直接使用深蓝色，不再渐变 */
+            color: #1f2e4a;
             margin-bottom: 0.8rem;
         }
         .detail-meta {
@@ -189,27 +189,47 @@
             padding-top: 2rem;
         }
 
-        @media (max-width: 700px) {
-            .container { padding: 1rem; }
-            .header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .title-zone { text-align: left; width: 100%; }
-            .typing-title {
-                font-size: 1.4rem;
-                white-space: normal;
-                border-right: none;
-                animation: none;
-            }
-            .detail-title { font-size: 1.6rem; }
+        /* ---------- 骨架屏样式（新增） ---------- */
+        .skeleton-title {
+            height: 2.2rem;
+            width: 70%;
+            background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+        }
+        .skeleton-meta {
+            display: inline-block;
+            height: 1rem;
+            width: 6rem;
+            background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 6px;
+        }
+        .skeleton-line {
+            height: 1rem;
+            width: 100%;
+            background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        .skeleton-line.short {
+            width: 60%;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
-        /* 暗色模式适配 */
+        /* 夜间模式适配 */
         @media (prefers-color-scheme: dark) {
             body { background: #121826; color: #e2e8f0; }
             .article-detail { background: #1e293b; border-color: #2d3748; }
-            /* 暗色模式标题：纯浅色，无渐变 */
-            .detail-title {
-                color: #f1f5f9;
-            }
+            .detail-title { color: #f1f5f9; }
             .detail-meta, .detail-content { color: #cbd5e1; }
             .detail-content blockquote {
                 background: #0f172a;
@@ -223,6 +243,25 @@
             .btn-back:hover { background: #2d3a5e; border-color: #818cf8; color: white; }
             .header { border-bottom-color: rgba(100, 116, 139, 0.3); }
             .sub { color: #9ca3af; }
+
+            /* 骨架屏暗色模式 */
+            .skeleton-title, .skeleton-meta, .skeleton-line {
+                background: linear-gradient(90deg, #334155 25%, #475569 50%, #334155 75%);
+            }
+        }
+
+        /* 响应式 */
+        @media (max-width: 700px) {
+            .container { padding: 1rem; }
+            .header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .title-zone { text-align: left; width: 100%; }
+            .typing-title {
+                font-size: 1.4rem;
+                white-space: normal;
+                border-right: none;
+                animation: none;
+            }
+            .detail-title { font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -246,9 +285,23 @@
             <i class="fas fa-arrow-left"></i> 返回首页
         </a>
 
-        <!-- 文章内容区域 -->
+        <!-- 文章内容区域（内含骨架屏） -->
         <div id="articleDetailContent" class="article-detail">
-            <div class="loading"><i class="fas fa-spinner fa-pulse"></i> 正在加载文章元数据…</div>
+            <!-- 骨架屏占位结构，加载完成后由 JS 替换 -->
+            <div class="detail-header">
+                <div class="skeleton-title"></div>
+                <div class="detail-meta">
+                    <span class="skeleton-meta"></span>
+                    <span class="skeleton-meta"></span>
+                    <span class="skeleton-meta"></span>
+                </div>
+            </div>
+            <div class="detail-content">
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line short"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line short"></div>
+            </div>
         </div>
 
         <footer>
@@ -262,7 +315,7 @@
             "use strict";
 
             // ---------- 配置 ----------
-            const ARTICLES_JSON_PATH = '../../articles.json';  // 相对于当前文章目录的路径
+            const ARTICLES_JSON_PATH = '../../articles.json';  // 相对于当前文章目录的全局列表
             const MARKDOWN_FILE = './article.md';              // 正文文件（同目录下）
 
             // 工具函数：转义 HTML
@@ -304,7 +357,7 @@
                 return await res.json();
             }
 
-            // 根据 id 从数组中查找文章数据
+            // 根据 id 查找文章
             function findArticleById(articles, id) {
                 return articles.find(art => String(art.id) === String(id));
             }
@@ -328,8 +381,8 @@
                     // 更新页面标题
                     document.title = `${article.title} | 中政集团`;
 
-                    // 3. 渲染文章头部信息
-                    const headerHtml = `
+                    // 3. 用真实标题和元数据替换骨架屏（保留 content 区域以供后续填充）
+                    container.innerHTML = `
                         <div class="detail-header">
                             <div class="detail-title">${escapeHtml(article.title)}</div>
                             <div class="detail-meta">
@@ -339,13 +392,16 @@
                             </div>
                         </div>
                         <div class="detail-content" id="detailMarkdownBody">
-                            <div class="loading"><i class="fas fa-spinner fa-pulse"></i> 加载正文中…</div>
+                            <!-- 骨架屏占位，等待正文加载 -->
+                            <div class="skeleton-line"></div>
+                            <div class="skeleton-line short"></div>
+                            <div class="skeleton-line"></div>
+                            <div class="skeleton-line short"></div>
                         </div>
                     `;
-                    container.innerHTML = headerHtml;
                     const contentDiv = document.getElementById('detailMarkdownBody');
 
-                    // 4. 加载同目录下的 Markdown 文件
+                    // 4. 加载 Markdown 正文
                     let markdownText;
                     try {
                         const mdRes = await fetch(MARKDOWN_FILE);
@@ -360,11 +416,11 @@
                         return;
                     }
 
-                    // 5. 渲染 Markdown 为 HTML
+                    // 5. 渲染 Markdown 为 HTML，并替换骨架屏
                     const rawHtml = marked.parse(markdownText, { async: false });
                     contentDiv.innerHTML = rawHtml;
 
-                    // 6. 触发 MathJax 渲染
+                    // 6. 触发 MathJax 重新渲染
                     if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
                         await MathJax.typesetPromise([contentDiv]);
                     }
