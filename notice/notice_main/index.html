@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>文章详情 · 中政集团</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.luogu.com.cn/upload/image_hosting/x37au7h1.png">
+
+    <!-- 字体与图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- MathJax 配置与脚本 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                packages: ['base', 'ams', 'text', 'color', 'boldsymbol'],
+                macros: { space: "\\ ", to: "\\to", sim: "\\sim", dots: "\\dots", cdots: "\\cdots" }
+            },
+            options: { ignoreHtmlClass: 'tex2jax_ignore', processHtmlClass: 'tex2jax_process' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <!-- Markdown 解析库 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- 外部样式（文章详情页专用） -->
+    <link rel="stylesheet" href="../../css/article.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部（与主页一致） -->
+        <div class="header">
+            <div class="logo-area">
+                <div class="about-image">
+                    <img src="https://zdzx.zhongzheng.tech/favicon_2.png" alt="中政集团 Logo" width="300" height="80">
+                </div>
+            </div>
+            <div class="title-zone">
+                <div class="typing-title" id="typingTitle"></div>
+                <div class="sub">中政 ZHOENG · 河北正定中学办事处</div>
+            </div>
+        </div>
+
+        <!-- 返回首页 -->
+        <a class="btn-back" href="../../">
+            <i class="fas fa-arrow-left"></i> 返回首页
+        </a>
+
+        <!-- 文章内容区域（内含骨架屏） -->
+        <div id="articleDetailContent" class="article-detail">
+            <!-- 骨架屏占位结构，加载完成后由 JS 替换 -->
+            <div class="detail-header">
+                <div class="skeleton-title"></div>
+                <div class="detail-meta">
+                    <span class="skeleton-meta"></span>
+                    <span class="skeleton-meta"></span>
+                    <span class="skeleton-meta"></span>
+                </div>
+            </div>
+            <div class="detail-content">
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line short"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line short"></div>
+            </div>
+        </div>
+
+        <footer>
+            中政集团 · 中政科技 <span>&copy;</span> 2025-2026<br>
+            中政 ZHOENG · 河北正定中学办事处 <span>&copy;</span> 2026-2026
+        </footer>
+    </div>
+
+    <!-- 外部脚本（文章详情页专用） -->
+    <script src="../../js/article.js" defer></script>
+</body>
+</html>
