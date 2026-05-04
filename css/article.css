@@ -196,6 +196,26 @@ body {
     font-size: 0.9em;
 }
 
+/* ===== 文章内链接样式（蓝色系，覆盖浏览器默认紫色） ===== */
+.detail-content a {
+    color: #2563eb;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+.detail-content a:visited {
+    color: #1d4ed8;
+}
+
+.detail-content a:hover {
+    color: #3b82f6;
+}
+
+.detail-content a:active {
+    color: #1e40af;
+}
+
 /* ===== 提示信息框 ===== */
 .info-box {
     background: #eef3ff;
@@ -314,6 +334,23 @@ footer {
     .detail-content code {
         background: #0f172a;
         color: #e2e8f0;
+    }
+
+    /* 夜间模式链接颜色 */
+    .detail-content a {
+        color: #60a5fa;
+    }
+
+    .detail-content a:visited {
+        color: #93bbfc;
+    }
+
+    .detail-content a:hover {
+        color: #93c5fd;
+    }
+
+    .detail-content a:active {
+        color: #bfdbfe;
     }
 
     .info-box {
