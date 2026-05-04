@@ -43,7 +43,7 @@
 
 [文档与帮助 · 网站开发工作组](https://docs.zhongzheng.tech/docs/developer/)
 
-[<原>帮助文档 · 网站开发工作组](https://docs.zhongzheng.tech/docs/developer/)
+[<原>帮助文档 · 网站开发工作组](https://zdzx.zhongzheng.tech/help/developer/)
 
 ---
 
