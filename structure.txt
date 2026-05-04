@@ -1,59 +1,62 @@
 Github zZHOENG/zdzx 仓库文件结构
 
 zdzx/  
-├── 6b590458c3a439792dc47ab0cf4d79ad.txt  
-├── CNAME  
-├── README.md  
-├── articles.json  
-├── categories.json  
-├── favicon.ico  
-├── favicon.png  
-├── favicon_2.png  
-├── index.html  
-├── resources.json  
+├── 6b590458c3a439792dc47ab0cf4d79ad.txt  微信验证文件
+├── CNAME  网站域名
+├── README.md  网站自述/简介文件
+├── articles.json  网站主页/详情页文章信息
+├── categories.json  网站主页栏目信息
+├── favicon.ico  校徽 ico 文件（32x32）
+├── favicon.png  校徽 png 文件
+├── favicon_2.png  校徽校名组合 png 文件
+├── index.html  网站源代码
+├── resources.json  网站主页外部链接信息
+├── structure.txt  网站文件结构说明文件（此文件）
 │  
-├── backup/  
-│   ├── README.md  
-│   ├── index_backup.html  
-│   └── index_empty.html  
+├── backup/  （备份用文件夹）
+│   ├── README.md  （文件夹自述/简介文件）
+│   ├── index_backup.html  （网站主页静态占位<全>源代码）
+│   └── index_empty.html  （网站主页静态占位<空>源代码）
 │  
-├── css/  
-│   ├── article.css  
-│   ├── help.css  
-│   └── style.css  
+├── css/  （css 文件存放文件夹）
+│   ├── article.css  文章详情页用 css 文件
+│   ├── help.css  <原>帮助文档详情页用 css 文件
+│   └── style.css  网站主页用 css 文件
 │  
-├── help/  
-│   ├── README.md  
-│   ├── developer/  
-│   │   ├── d.md  
-│   │   ├── index.html  
-│   │   └── meta.json  
-│   └── feedback/  
-│       ├── f.md  
-│       ├── index.html  
-│       └── meta.json  
+├── help/  （网站<原>帮助文件存放文件夹）
+│   ├── README.md  文件夹自述/简介文件
+│   ├── developer/  <原>网站开发者帮助文档文件夹
+│   │   ├── d.md  <原>网站开发者帮助文档内容（md 文件）
+│   │   ├── index.html  <原>网站开发者帮助文档详情页源代码
+│   │   └── meta.json  <原>网站开发者帮助文档详情页信息
+│   └── feedback/  <原>网站反馈及投稿帮助文档文件夹
+│       ├── f.md  <原>网站反馈及投稿帮助文档内容（md 文件）
+│       ├── index.html  <原>网站反馈及投稿帮助文档详情页源代码
+│       └── meta.json  <原>网站反馈及投稿帮助文档详情页信息
 │  
-├── img/  
-│   ├── README.md  
-│   ├── favicon.ico  
-│   ├── favicon.png  
-│   ├── favicon.svg  
-│   ├── favicon256.ico  
-│   ├── favicon32.ico  
-│   └── favicon_2.png  
+├── img/  （图像文件存放文件夹）
+│   ├── README.md  文件夹自述/简介文件
+│   ├── favicon.ico  校徽 ico 文件（32x32）
+│   ├── favicon.png  校徽 png 文件
+│   ├── favicon.svg  校徽 svg 文件
+│   ├── favicon256.ico  校徽 ico 文件（256x256）
+│   ├── favicon32.ico  校徽 ico 文件（32x32）
+│   └── favicon_2.png  校徽校名组合 png 文件
 │  
-├── js/  
-│   ├── article.js  
-│   ├── help.js  
-│   └── main.js  
+├── js/  （js 文件存放文件夹）
+│   ├── article.js  文章详情页用 js 文件
+│   ├── help.js  <原>帮助文档详情页用 js 文件
+│   └── main.js  网站主页用 js 文件
 │  
-└── tech/  
-    ├── tech_article_1/  
-    │   ├── article.md  
-    │   ├── index.html  
-    │   └── meta.json  
-    └── tech_article_2/  
-    │   ├── article.md  
-    │   ├── index.html  
-    │   └── meta.json  
-    └── README.md  
+└── tech/  （科技 · 工程栏目文件存放文件夹）
+    ├── tech_article_1/  科技 · 工程栏目文章一文件夹
+    │   ├── article.md  文章内容（md 文件）
+    │   ├── index.html  文章详情页源代码
+    │   └── meta.json  文章详情页源信息
+    └── tech_article_2/  科技 · 工程栏目文章二文件夹
+    │   ├── article.md  文章内容（md 文件）
+    │   ├── index.html  文章详情页源代码
+    │   └── meta.json  文章详情页源信息
+    └── README.md  文件夹自述/简介文件
+
+- Update:2026.05.04 10:24 By ZZA000HAH.
