@@ -8,13 +8,13 @@
     {
         "title": "网站开发者",
         "description": "zdzx.zhongzheng.tech 网站开发者",
-        "url": "https://docs.zhongzheng.tech/docs/developer/",
+        "url": "https://docs.zhongzheng.tech/docs/help/developer/",
         "icon": "fas fa-code"
     },
     {
         "title": "反馈及投稿",
         "description": "网站相关问题反馈与文章投稿",
-        "url": "https://docs.zhongzheng.tech/docs/feedback/",
+        "url": "https://docs.zhongzheng.tech/docs/help/feedback/",
         "icon": "fas fa-comments"
     },
     {
