@@ -11,7 +11,7 @@
     let articlesData       = [];
     let categoriesData     = [];
     let resourcesData      = [];
-    let allArticlesConfig  = [];   // 全部文章允许的分类 id
+    let allArticlesConfig  = [];
     let currentCategory    = 'all';
 
     // ---------- DOM 元素 ----------
@@ -19,7 +19,6 @@
     const blogListContainer = document.getElementById('blogListContainer');
     const resourcesGrid     = document.getElementById('resourcesGrid');
     const typingTitleEl     = document.getElementById('typingTitle');
-    const archiveListEl     = document.getElementById('archiveList');
 
     // ---------- 辅助：转义 HTML ----------
     function escapeHtml(str) {
@@ -27,9 +26,9 @@
         return String(str).replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' })[m]);
     }
 
-    // ---------- 解析日期字符串 (YYYY.MM.DD) 为 Date 对象 ----------
+    // ---------- 解析日期字符串 ----------
     function parseDate(dateStr) {
-        if (!dateStr) return new Date(0); // 无效日期排最后
+        if (!dateStr) return new Date(0);
         const parts = dateStr.split('.');
         if (parts.length === 3) {
             const year = parseInt(parts[0], 10);
@@ -42,38 +41,30 @@
 
     // ---------- 文章排序函数 ----------
     function sortArticles(articles) {
-        // 深拷贝避免影响原数组
         const sorted = [...articles];
-        // 分离置顶和非置顶
         const topArticles = sorted.filter(a => a.top === true);
         const normalArticles = sorted.filter(a => a.top !== true);
 
-        // 组内排序规则
         const sortByRules = (a, b) => {
             const pidA = (typeof a.pid === 'number' && a.pid > 0) ? a.pid : 0;
             const pidB = (typeof b.pid === 'number' && b.pid > 0) ? b.pid : 0;
-            // 优先按是否有 pid 分成两组：有 pid 的在前，无 pid(或0) 的在后
             if (pidA > 0 && pidB === 0) return -1;
             if (pidA === 0 && pidB > 0) return 1;
-            // 都有 pid 时按 pid 升序
             if (pidA > 0 && pidB > 0) return pidA - pidB;
-            // 都没有 pid，按日期降序（最新在前）
             const dateA = parseDate(a.date);
             const dateB = parseDate(b.date);
-            return dateB - dateA;   // 降序
+            return dateB - dateA;
         };
 
         topArticles.sort(sortByRules);
         normalArticles.sort(sortByRules);
-
         return topArticles.concat(normalArticles);
     }
 
-    // ---------- 筛选文章（支持全部文章配置）----------
+    // ---------- 筛选文章 ----------
     function filterArticles(category) {
         let filtered;
         if (category === 'all') {
-            // 使用全部文章配置（若为空则退回显示所有分类）
             if (allArticlesConfig.length > 0) {
                 filtered = articlesData.filter(article => allArticlesConfig.includes(article.category));
             } else {
@@ -85,11 +76,12 @@
         return sortArticles(filtered);
     }
 
-    // ---------- 渲染侧边栏（完全替换 DOM） ----------
+    // ---------- 渲染侧边栏 ----------
     function renderSidebar() {
         if (!sidebarEl) return;
-        // 保留归档容器（在最后），只重建导航部分
-        const archiveHTML = document.getElementById('archiveContainer') ? document.getElementById('archiveContainer').outerHTML : '';
+        // 保存归档容器 HTML
+        const archiveContainer = document.getElementById('archiveContainer');
+        const archiveHTML = archiveContainer ? archiveContainer.outerHTML : '';
         let html = '';
         html += `<div class="nav-item active" data-category="all">
                     <i class="fas fa-newspaper"></i>
@@ -101,30 +93,24 @@
                         <span>${escapeHtml(cat.label)}</span>
                     </div>`;
         });
-        // 把归档容器重新放回
         html += archiveHTML;
         sidebarEl.innerHTML = html;
 
-        // 重新绑定事件（事件委托）
+        // 事件委托
         sidebarEl.addEventListener('click', (e) => {
             const item = e.target.closest('.nav-item');
             if (!item) return;
             const cat = item.getAttribute('data-category');
             if (!cat || cat === currentCategory) return;
             currentCategory = cat;
-            // 更新高亮
             sidebarEl.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             item.classList.add('active');
-            // 重新渲染文章列表和归档
             renderBlogList();
             renderArchive();
         });
-
-        // 重新获取归档列表元素引用（因为 innerHTML 已更新）
-        window._archiveListEl = document.getElementById('archiveList');
     }
 
-    // ---------- 渲染外部资源卡片 ----------
+    // ---------- 渲染外部资源 ----------
     function renderResources() {
         if (!resourcesGrid) return;
         resourcesGrid.innerHTML = '';
@@ -145,7 +131,7 @@
         });
     }
 
-    // ---------- 渲染文章列表（主页卡片） ----------
+    // ---------- 渲染文章列表 ----------
     function renderBlogList() {
         if (!blogListContainer) return;
         const filtered = filterArticles(currentCategory);
@@ -157,7 +143,6 @@
 
         let html = '';
         filtered.forEach(article => {
-            // 徽章处理：置顶和推荐可以并存
             let badgesHtml = '';
             if (article.top) {
                 badgesHtml += '<div class="top-badge"><i class="fas fa-thumbtack"></i> 置顶</div>';
@@ -203,9 +188,13 @@
 
         let html = '';
         filtered.forEach(article => {
+            // 优先使用 archive_title，若不存在或为空字符串则使用 title
+            const archiveTitle = (article.archive_title && article.archive_title.trim() !== '') 
+                                 ? article.archive_title 
+                                 : article.title;
             html += `
                 <a class="archive-item" href="${escapeHtml(article.url)}" title="${escapeHtml(article.title)}">
-                    <span class="archive-date">${escapeHtml(article.date)}</span>${escapeHtml(article.title)}
+                    <span class="archive-date">${escapeHtml(article.date)}</span>${escapeHtml(archiveTitle)}
                 </a>
             `;
         });
@@ -230,15 +219,14 @@
             }
         } catch (e) {
             console.warn('全部文章配置文件加载失败，将显示所有分类文章', e);
-            allArticlesConfig = [];   // 默认为空，后续走显示全部逻辑
+            allArticlesConfig = [];
         }
     }
 
-    // ---------- 初始化所有数据并替换 DOM ----------
+    // ---------- 初始化 ----------
     async function loadAllData() {
         blogListContainer.innerHTML = '<div class="loading-placeholder"><i class="fas fa-spinner fa-pulse"></i> 正在加载文章列表...</div>';
         try {
-            // 并行加载基础数据
             const [categories, resources, articles] = await Promise.all([
                 loadJSON(CATEGORIES_JSON_URL).catch(() => []),
                 loadJSON(RESOURCES_JSON_URL).catch(() => []),
@@ -248,14 +236,12 @@
             resourcesData  = Array.isArray(resources)  ? resources  : [];
             articlesData   = Array.isArray(articles)   ? articles   : [];
 
-            // 加载全部文章配置（不影响其他渲染）
             await loadAllArticlesConfig();
 
-            // 渲染所有组件
             renderSidebar();
             renderResources();
             renderBlogList();
-            renderArchive();      // 初始渲染归档
+            renderArchive();
         } catch (e) {
             console.error('数据加载失败:', e);
             blogListContainer.innerHTML = `<div class="loading-placeholder" style="color:#b91c1c;">
@@ -282,7 +268,6 @@
         type();
     }
 
-    // ---------- 页面启动 ----------
     function init() {
         typeWriterEffect();
         loadAllData();
