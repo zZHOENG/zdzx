@@ -69,6 +69,61 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
+/* ---------- 归档目录栏 ---------- */
+.archive-container {
+    margin-top: 1rem;
+    border-top: 2px solid rgba(156, 180, 209, 0.4);
+    padding-top: 1rem;
+}
+
+.archive-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #3b4b6e;
+    padding: 0 0.5rem 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.archive-list {
+    max-height: 320px;          /* 固定高度，内部滚动 */
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.archive-item {
+    display: block;
+    padding: 0.5rem 0.8rem;
+    margin: 0.2rem 0;
+    border-radius: 18px;
+    font-size: 0.82rem;
+    color: #2c3e66;
+    text-decoration: none;
+    transition: background 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.archive-item:hover {
+    background: rgba(165, 185, 215, 0.3);
+}
+
+.archive-item .archive-date {
+    font-size: 0.7rem;
+    color: #8c9bbb;
+    margin-right: 6px;
+}
+
+.archive-loading {
+    text-align: center;
+    color: #8c9bbb;
+    padding: 1rem;
+    font-size: 0.8rem;
+}
+
 @media (prefers-color-scheme: dark) {
     .sidebar {
         background: rgba(30, 36, 48, 0.7);
@@ -83,6 +138,22 @@ body {
     }
     .nav-item:hover {
         background: rgba(100, 116, 139, 0.4);
+    }
+
+    .archive-container {
+        border-top-color: rgba(100, 116, 139, 0.4);
+    }
+    .archive-title {
+        color: #cbd5e6;
+    }
+    .archive-item {
+        color: #cbd5e6;
+    }
+    .archive-item:hover {
+        background: rgba(100, 116, 139, 0.4);
+    }
+    .archive-item .archive-date {
+        color: #6b7280;
     }
 }
 
@@ -254,6 +325,37 @@ body {
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
+/* ---------- 新增：推荐文章徽章 ---------- */
+.recommend-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: #2dd4bf;
+    color: #0f3d38;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* 同时存在置顶和推荐时，错开位置 */
+.blog-card .top-badge + .recommend-badge {
+    top: 2.5rem;   /* 放在置顶徽章下方 */
+}
+.blog-card .recommend-badge + .top-badge {
+    top: 2.5rem;
+}
+
+/* 如果只有一个徽章，维持原位置 */
+.blog-card .top-badge:only-child,
+.blog-card .recommend-badge:only-child {
+    top: 1rem;
+}
+
 .blog-card:hover {
     transform: translateY(-4px);
     background: #ffffff;
@@ -353,6 +455,15 @@ footer {
         color: #6b7280;
         border-top-color: #2d3748;
     }
+
+    .top-badge {
+        background: #f59e0b;
+        color: #1f1a00;
+    }
+    .recommend-badge {
+        background: #14b8a6;
+        color: #0b2e2a;
+    }
 }
 
 /* 响应式 */
@@ -397,5 +508,13 @@ footer {
     }
     .resources-grid {
         flex-direction: column;
+    }
+    /* 移动端归档区可以隐藏或改为横向滚动，这里选择保持原样但宽度自适应 */
+    .archive-container {
+        width: 100%;
+        margin-top: 0.8rem;
+    }
+    .archive-list {
+        max-height: 200px;
     }
 }
