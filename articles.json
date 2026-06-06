@@ -6,7 +6,7 @@
       "date": "2026.04.26",
       "category": "科技 · 工程",
       "top": false,
-      "pid": 0,
+      "pid": 1,
       "excerpt": "序言：【校园观察】至今出来三期了，本文将介绍【校园观察 第二期】视频的下载方法，这种方法对于第三期依然适用。",
       "url": "/tech/tech_article_1/"
     },
@@ -28,7 +28,7 @@
       "date": "2026.05.04",
       "category": "公告 · 通知",
       "top": true,
-      "pid": 1,
+      "pid": 0,
       "excerpt": "【公告】：zdzx.zhongzheng.tech 网站全站主公告",
       "url": "/notice/notice_main/"
     }
