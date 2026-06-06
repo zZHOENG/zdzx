@@ -25,9 +25,11 @@ body {
     gap: 2rem;
 }
 
-/* 左侧导航栏 */
+/* 左侧导航栏 - 固定宽度，防止被内容撑开 */
 .sidebar {
-    flex: 0 0 240px;
+    flex: 0 0 260px;                /* 固定宽度 260px */
+    width: 260px;                   /* 兼容部分浏览器 */
+    max-width: 260px;
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(8px);
     border-radius: 32px;
@@ -37,6 +39,7 @@ body {
     position: sticky;
     top: 2rem;
     transition: all 0.2s;
+    overflow: hidden;               /* 防止内部元素溢出 */
 }
 
 .nav-item {
@@ -74,6 +77,7 @@ body {
     margin-top: 1rem;
     border-top: 2px solid rgba(156, 180, 209, 0.4);
     padding-top: 1rem;
+    /* 继承父级的 overflow: hidden，无需额外设置 */
 }
 
 .archive-title {
@@ -87,13 +91,13 @@ body {
 }
 
 .archive-list {
-    max-height: 320px;          /* 固定高度，内部滚动 */
+    max-height: 320px;              /* 固定高度，内部滚动 */
     overflow-y: auto;
     padding-right: 4px;
 }
 
 .archive-item {
-    display: block;
+    display: block;                 /* 每个条目独占一行 */
     padding: 0.5rem 0.8rem;
     margin: 0.2rem 0;
     border-radius: 18px;
@@ -101,9 +105,11 @@ body {
     color: #2c3e66;
     text-decoration: none;
     transition: background 0.2s;
+    /* 关键：单行省略号 */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 100%;                /* 确保不超出父容器 */
     cursor: pointer;
 }
 
@@ -124,6 +130,7 @@ body {
     font-size: 0.8rem;
 }
 
+/* 暗色模式 */
 @media (prefers-color-scheme: dark) {
     .sidebar {
         background: rgba(30, 36, 48, 0.7);
@@ -325,7 +332,7 @@ body {
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-/* ---------- 新增：推荐文章徽章 ---------- */
+/* 推荐文章徽章 */
 .recommend-badge {
     position: absolute;
     top: 1rem;
@@ -342,15 +349,15 @@ body {
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-/* 同时存在置顶和推荐时，错开位置 */
+/* 同时存在置顶和推荐时错开位置 */
 .blog-card .top-badge + .recommend-badge {
-    top: 2.5rem;   /* 放在置顶徽章下方 */
+    top: 2.5rem;
 }
 .blog-card .recommend-badge + .top-badge {
     top: 2.5rem;
 }
 
-/* 如果只有一个徽章，维持原位置 */
+/* 只有一个徽章时保持原位置 */
 .blog-card .top-badge:only-child,
 .blog-card .recommend-badge:only-child {
     top: 1rem;
@@ -408,7 +415,7 @@ footer {
     padding-top: 2rem;
 }
 
-/* 夜间模式 */
+/* 夜间模式（全局） */
 @media (prefers-color-scheme: dark) {
     body {
         background: #121826;
@@ -466,7 +473,7 @@ footer {
     }
 }
 
-/* 响应式 */
+/* 响应式布局 */
 @media (max-width: 860px) {
     .container {
         flex-direction: column;
@@ -475,6 +482,8 @@ footer {
     .sidebar {
         flex: auto;
         position: static;
+        width: auto;
+        max-width: none;
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
@@ -509,7 +518,6 @@ footer {
     .resources-grid {
         flex-direction: column;
     }
-    /* 移动端归档区可以隐藏或改为横向滚动，这里选择保持原样但宽度自适应 */
     .archive-container {
         width: 100%;
         margin-top: 0.8rem;
