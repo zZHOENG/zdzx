@@ -2,6 +2,7 @@
     {
       "id": 1,
       "title": "正中校园网获取【校园观察】视频指南",
+      "archive_title": "",
       "author": "ZZA000HAH",
       "date": "2026.04.26",
       "category": "科技 · 工程",
@@ -13,6 +14,7 @@
     {
       "id": 2,
       "title": "正中教室计算机下载并安装 Python 第三方库指南",
+      "archive_title": "Python 第三方库安装指南",
       "author": "ZZA000HAH",
       "date": "2026.05.02",
       "category": "科技 · 工程",
@@ -24,6 +26,7 @@
     {
       "id": 3,
       "title": "【公告】网站全站主公告",
+      "archive_title": "",
       "author": "ZZA000HAH",
       "date": "2026.05.04",
       "category": "公告 · 通知",
