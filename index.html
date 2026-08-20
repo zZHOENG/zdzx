@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>河北正定中学</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", 
+                         "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            max-width: 720px;
+            width: 100%;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-top {
+            background-color: #0056b3;
+            padding: 56px 48px 48px 48px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(2px);
+            padding: 6px 18px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card-top h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .card-top .subhead {
+            font-size: 1.15rem;
+            font-weight: 400;
+            opacity: 0.85;
+            line-height: 1.6;
+            max-width: 480px;
+            margin: 0 auto 8px auto;
+        }
+
+        .card-top .meta {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card-top .meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-top .meta svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            opacity: 0.7;
+        }
+
+        .card-bottom {
+            background-color: #e8e8e8;
+            padding: 48px 48px 56px 48px;
+            text-align: center;
+        }
+
+        .card-bottom p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #1e1e1e;
+            max-width: 520px;
+            margin: 0 auto 20px auto;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        .card-bottom .highlight {
+            background: rgba(0, 86, 179, 0.08);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+            color: #0056b3;
+        }
+
+        .divider {
+            width: 48px;
+            height: 3px;
+            background-color: #0056b3;
+            border-radius: 4px;
+            margin: 0 auto 24px auto;
+            opacity: 0.3;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: default;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: #0056b3;
+            color: #fff;
+            border-color: #0056b3;
+        }
+
+        .btn-primary:hover {
+            background-color: #004099;
+            border-color: #004099;
+            transform: scale(1.02);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #1e1e1e;
+            border-color: #b0b0b0;
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: #888;
+        }
+
+        @media (max-width: 600px) {
+            .card-top {
+                padding: 40px 24px 32px 24px;
+            }
+
+            .card-top h1 {
+                font-size: 2rem;
+            }
+
+            .card-top .subhead {
+                font-size: 1rem;
+            }
+
+            .card-bottom {
+                padding: 32px 24px 40px 24px;
+            }
+
+            .card-bottom p {
+                font-size: 0.98rem;
+            }
+
+            .btn {
+                padding: 10px 24px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .card-top h1 {
+                font-size: 1.7rem;
+            }
+
+            .card-top .meta {
+                font-size: 0.8rem;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+
+        <div class="card-top">
+            <div class="badge">中政集团 · 中政科技</div>
+            <h1>河北正定中学</h1>
+            <p class="subhead">
+                <strong>河北正定中学 · 线上活动中心</strong>
+            </p>
+            <div class="meta">
+                <span>
+                    <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                    2026-08-20
+                </span>
+                <span>
+                    <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"/><circle cx="12" cy="16" r="1.5" fill="currentColor"/><path d="M12 8c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2s2-.9 2-2v-2c0-1.1-.9-2-2-2z" fill="currentColor"/></svg>
+                    旧网站界面指引新网址
+                </span>
+            </div>
+        </div>
+
+        <div class="card-bottom">
+            <div class="divider"></div>
+            <p>
+              <strong>www.zhongzheng.cn</strong>
+              <br>
+              <strong>河北正定中学欢迎您</strong>
+              <br>
+              <strong>zdzx.zhoeng.com.cn</strong>
+              <br>
+              <strong>河北正定中学线上活动中心欢迎您</strong>
+              <br>
+              <br>
+              注：本网站域名将于 2026-10-03 日过期
+            </p>
+            <p style="font-size:0.95rem; opacity:0.7; margin-top:-8px;">
+                创新 · 科技 · 文化
+            </p>
+
+            <div class="actions">
+              <a href="https://zdzx.zhoeng.com.cn/" class="btn btn-primary">正中线上活动中心</a>
+              <a href="http://www.zhengzhong.cn/" class="btn btn-outline">河北正定中学官网</a>
+            </div>
+
+            <div style="margin-top: 32px; font-size:0.75rem; color:#6b6b6b; letter-spacing:0.02em; border-top:1px solid rgba(0,0,0,0.05); padding-top:20px;">
+                <span>© 2025-2026 · 中政集团 · 中政科技</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
